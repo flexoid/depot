@@ -38,4 +38,8 @@ describe Product do
     Product.create!(@attr)
     Product.new(@attr).should_not be_valid
   end
+
+  it "should have the title at least 10 characters long" do
+    Product.new(@attr.merge(title: "7 chars")).should_not be_valid
+  end
 end

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.1'
 gem 'sqlite3'
+gem 'formtastic', git: 'git://github.com/justinfrench/formtastic.git', branch: "2.1-stable"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

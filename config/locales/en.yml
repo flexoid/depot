@@ -1,5 +1,9 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  formtastic:
+    labels:
+      product:
+        image_url: "Image URL"
+    hints:
+      product:
+        title: "More than 10 characters long"
+        image_url: "Only jpg, png or gif image"

@@ -1,6 +1,5 @@
 require 'spec_helper'
 include ActionView::Helpers::NumberHelper
-include ActionView::Helpers::SanitizeHelper
 
 describe StoreController do
   render_views
@@ -30,7 +29,7 @@ describe StoreController do
       @products.each do |product|
         response.should have_selector("div.entry") do |entry|
           entry.should have_selector("h3", content: product.title)
-          entry.should contain(sanitize(product.description))
+          entry.should contain(product.description)
           entry.should have_selector("div.price_line>span.price", content: number_to_currency(product.price))
         end
       end

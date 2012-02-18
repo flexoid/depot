@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe ProductsController do
+  render_views
 
   def valid_session
     {}
@@ -24,6 +25,22 @@ describe ProductsController do
       get :index, {}, valid_session
       assigns(:products).should eq(@products)
     end
+
+    it "should have an entry for each product" do
+      get 'index'
+      @products.each do |product|
+        response.should have_selector("td>dl>dt", content: product.title)
+      end
+    end
+
+    it "should show links for each product" do
+      get 'index'
+      @products.each do |product|
+        response.should have_selector("a", href: product_path(product), content: 'Show')
+        response.should have_selector("a", href: edit_product_path(product), content: 'Edit')
+        response.should have_selector("a", href: product_path(product), content: 'Destroy')
+      end
+    end
   end
 
   describe "GET show" do
@@ -40,6 +57,20 @@ describe ProductsController do
     it "assigns the requested product as @product" do
       get :show, {id: @product}, valid_session
       assigns(:product).should eq(@product)
+    end
+
+    it "should show the right information" do
+      get :show, {id: @product}, valid_session
+      response.should contain(@product.title)
+      response.should contain(@product.description)
+      response.should contain(@product.image_url)
+      response.should contain(@product.price.to_s)
+    end
+
+    it "should show links" do
+      get :show, {id: @product}, valid_session
+      response.should have_selector("a", href: edit_product_path(@product))
+      response.should have_selector("a", href: products_path)
     end
   end
 
@@ -79,12 +110,6 @@ describe ProductsController do
 
       before(:each) do
         @attr = Factory.attributes_for :product
-      end
-
-      it "creates a new Product" do
-        expect {
-          post :create, {product: @attr}, valid_session
-        }.to change(Product, :count).by(1)
       end
 
       it "assigns a newly created product as @product" do

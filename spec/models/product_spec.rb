@@ -42,4 +42,20 @@ describe Product do
   it "should have the title at least 10 characters long" do
     Product.new(@attr.merge(title: "7 chars")).should_not be_valid
   end
+
+  describe "line_items associations" do
+
+    before(:each) do
+      @product = Factory(:product)
+      @line_items = FactoryGirl.create_list(:line_item, 3, product: @product)
+    end
+
+    it "should have the line_items attribute" do
+      @product.should respond_to(:line_items)
+    end
+
+    it "should have the right line_items" do
+      @product.line_items.should eq(@line_items)
+    end
+  end
 end

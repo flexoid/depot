@@ -7,10 +7,7 @@ describe StoreController do
   describe "GET 'index'" do
 
     before(:each) do
-      @products = []
-      5.times do
-        @products << Factory(:product)
-      end
+      @products = FactoryGirl.create_list(:product, 5)
     end
 
     it "should be successful" do

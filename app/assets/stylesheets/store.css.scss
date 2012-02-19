@@ -11,6 +11,11 @@
     border-bottom: 3px dotted #77d;
   }
 
+  span#counter {
+    color: #226;
+    font-family: sans-serif;
+  }
+
   /* An entry in the store catalog */
   .entry {
     overflow: auto;

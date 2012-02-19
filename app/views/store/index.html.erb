@@ -4,6 +4,9 @@
 
 <h1>Your Pragmatic Catalog</h1>
 
+<% if @counter > 5 %>
+  <span id="counter">You have visited this catalog <%= pluralize(@counter, "time") %> since the last use of the cart.</span>
+<% end %>
 <% @products.each do |product| %>
   <div class="entry">
     <%= image_tag(product.image_url) %>

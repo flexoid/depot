@@ -5,4 +5,8 @@ class LineItem < ActiveRecord::Base
 
   validates :cart_id, presence: true
   validates :product_id, presence: true
+
+  def total_price
+    product.price * quantity
+  end
 end

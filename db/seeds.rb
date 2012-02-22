@@ -46,3 +46,8 @@ LineItem.create!(product: Product.all[1], cart: Cart.all[1])
 LineItem.create!(product: Product.all[2], cart: Cart.all[2])
 LineItem.create!(product: Product.all[1], cart: Cart.all[0])
 LineItem.create!(product: Product.all[2], cart: Cart.all[1])
+
+LineItem.all.each do |item|
+  item.quantity = rand(1..3)
+  item.save
+end

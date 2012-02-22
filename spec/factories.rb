@@ -13,5 +13,6 @@ FactoryGirl.define do
   factory :line_item do
     product
     cart
+    quantity Random.rand(1..3)
   end
 end

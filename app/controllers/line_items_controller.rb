@@ -41,12 +41,12 @@ class LineItemsController < ApplicationController
   # POST /line_items.json
   def create
     @cart = current_cart
-    begin
-      product = Product.find(params[:product_id])
-    rescue ActiveRecord::RecordNotFound
-      product = nil
+    product = Product.find_by_id(params[:product_id])
+    if product
+      @line_item = @cart.add_product(product.id)
+    else
+      @line_item = LineItem.new
     end
-    @line_item = @cart.line_items.build(product: product)
 
     respond_to do |format|
       if @line_item.save

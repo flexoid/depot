@@ -11,7 +11,7 @@ describe "Products" do
           visit new_product_path
           fill_in "Title",        :with => ""
           fill_in "Description",  :with => ""
-          fill_in "Image url",    :with => ""
+          attach_file "product_image", File.join(Rails.root, "app/assets/images/ruby.jpg")
           fill_in "Price",        :with => ""
           click_button
           response.should render_template('products/new')
@@ -28,7 +28,7 @@ describe "Products" do
           visit new_product_path
           fill_in "Title",        :with => @product[:title]
           fill_in "Description",  :with => @product[:description]
-          fill_in "Image url",    :with => @product[:image_url]
+          attach_file "product_image", File.join(Rails.root, "app/assets/images/ruby.jpg")
           fill_in "Price",        :with => @product[:price]
           click_button
           response.should have_selector("p#notice", :content => "Product was successfully created.")
@@ -51,7 +51,7 @@ describe "Products" do
           visit edit_product_path(@product)
           fill_in "Title",        :with => ""
           fill_in "Description",  :with => ""
-          fill_in "Image url",    :with => ""
+          attach_file "product_image", File.join(Rails.root, "app/assets/images/ruby.jpg")
           fill_in "Price",        :with => ""
           click_button
           response.should render_template('products/edit')
@@ -68,7 +68,7 @@ describe "Products" do
           visit edit_product_path(@product)
           fill_in "Title",        :with => @product[:title] + " New Release"
           fill_in "Description",  :with => @product[:description]
-          fill_in "Image url",    :with => @product[:image_url]
+          attach_file "product_image", File.join(Rails.root, "app/assets/images/ruby.jpg")
           fill_in "Price",        :with => @product[:price]
           click_button
           response.should have_selector("p#notice", :content => "Product was successfully updated.")

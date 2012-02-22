@@ -19,11 +19,11 @@ describe Product do
   end
 
   it "should require image url" do
-    Product.new(@attr.merge(image_url: "")).should_not be_valid
+    Product.new(@attr.merge(image: nil)).should_not be_valid
   end
 
   it "should have image url in valid format" do
-    Product.new(@attr.merge(image_url: "...")).should_not be_valid
+    Product.new(@attr.merge(image: Pathname.new("pic.txt"))).should_not be_valid
   end
 
   it "should have numerical price" do

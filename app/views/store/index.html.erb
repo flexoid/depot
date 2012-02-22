@@ -9,7 +9,7 @@
 <% end %>
 <% @products.each do |product| %>
   <div class="entry">
-    <%= image_tag(product.image_url) %>
+    <%= thumbnail(product, '80x96!') %>
     <h3><%= product.title %></h3>
     <%= sanitize(product.description) %>
     <div class="price_line">

@@ -1,8 +1,13 @@
-<%= semantic_form_for @product do |f| %>
+<%= semantic_form_for @product, :html => {:multipart => true} do |f| %>
   <%= f.inputs do %>
     <%= f.input :title %>
     <%= f.input :description %>
-    <%= f.input :image_url %>
+    <%= f.input :image, as: :file %>
+    <%= f.hidden_field :retained_image %>
+    <% if @product.image_uid %>
+      <%= image_tag @product.image.thumb('100x100').url %>
+      <%= f.input :remove_image, as: :boolean %>
+    <% end %>
     <%= f.input :price %>
   <% end %>
   <%= f.actions %>

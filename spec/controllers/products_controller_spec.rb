@@ -60,7 +60,7 @@ describe ProductsController do
       get :show, {id: @product}, valid_session
       response.should contain(@product.title)
       response.should contain(@product.description)
-      response.should contain(@product.image_url)
+      response.should have_selector('img')
       response.should contain(@product.price.to_s)
     end
 

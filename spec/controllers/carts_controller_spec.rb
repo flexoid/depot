@@ -19,6 +19,7 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe CartsController do
+  render_views
 
   # This should return the minimal set of attributes required to create a valid
   # Cart. As you add validations to Cart, be sure to
@@ -26,7 +27,7 @@ describe CartsController do
   def valid_attributes
     {}
   end
-  
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # CartsController. Be sure to keep this updated too.
@@ -147,17 +148,26 @@ describe CartsController do
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested cart" do
-      cart = Cart.create! valid_attributes
+
+    before(:each) do
+      @cart = Factory(:cart)
+      @sess = valid_session.merge(cart_id: @cart)
+    end
+
+    it "should destroy the user's cart" do
       expect {
-        delete :destroy, {:id => cart.to_param}, valid_session
+        delete :destroy, {id: @cart}, @sess
       }.to change(Cart, :count).by(-1)
     end
 
-    it "redirects to the carts list" do
-      cart = Cart.create! valid_attributes
-      delete :destroy, {:id => cart.to_param}, valid_session
-      response.should redirect_to(carts_url)
+    it "should redirect to the carts list" do
+      delete :destroy, {id: @cart}, @sess
+      response.should redirect_to(store_url)
+    end
+
+    it "should show the notice that the cart was deleted" do
+      delete :destroy, {id: @cart}, @sess
+      flash[:notice].should_not be_empty
     end
   end
 

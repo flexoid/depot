@@ -43,7 +43,7 @@ class LineItemsController < ApplicationController
     @cart = current_cart
     product = Product.find_by_id(params[:product_id])
     if product
-      @line_item = @cart.add_product(product.id)
+      @line_item = @cart.add_product(product)
     else
       @line_item = LineItem.new
     end

@@ -23,5 +23,15 @@ describe Cart do
         LineItem.find_by_id(line_item).should be_nil
       end
     end
+
+    it "should group equal products in one line_item" do
+      product = Factory(:product)
+      @cart.line_items.delete_all
+      3.times do
+        @cart.add_product(product).save!
+      end
+      @cart.save
+      @cart.line_items.count.should eq(1)
+    end
   end
 end

@@ -166,9 +166,10 @@ describe LineItemsController do
       }.to change(LineItem, :count).by(-1)
     end
 
-    it "should redirect to the line_items list" do
+    it "should redirect with notice to the cart to which the item belonged" do
+      cart = @line_item.cart
       delete :destroy, {id: @line_item}, valid_session
-      response.should redirect_to(line_items_url)
+      response.should redirect_to(cart_url(cart))
     end
   end
 

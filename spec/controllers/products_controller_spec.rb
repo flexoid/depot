@@ -51,7 +51,7 @@ describe ProductsController do
       response.should be_success
     end
 
-    it "assigns the requested product as @product" do
+    it "should assign the requested product as @product" do
       get :show, {id: @product}, valid_session
       assigns(:product).should eq(@product)
     end
@@ -68,6 +68,12 @@ describe ProductsController do
       get :show, {id: @product}, valid_session
       response.should have_selector("a", href: edit_product_path(@product))
       response.should have_selector("a", href: products_path)
+    end
+
+    it "should redirect with notice to the store when invalid id was taken" do
+      get :show, {id: "invalid_id"}, valid_session
+      response.should redirect_to(store_url)
+      flash[:notice].should_not be_empty
     end
   end
 
@@ -95,9 +101,15 @@ describe ProductsController do
       response.should be_success
     end
 
-    it "assigns the requested product as @product" do
+    it "should assign the requested product as @product" do
       get :edit, {id: @product}, valid_session
       assigns(:product).should eq(@product)
+    end
+
+    it "should redirect with notice to the products list when invalid id was taken" do
+      get :edit, {id: "invalid_id"}, valid_session
+      response.should redirect_to(products_url)
+      flash[:notice].should_not be_empty
     end
   end
 

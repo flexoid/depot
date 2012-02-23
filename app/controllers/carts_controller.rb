@@ -39,7 +39,12 @@ class CartsController < ApplicationController
 
   # GET /carts/1/edit
   def edit
-    @cart = Cart.find(params[:id])
+    begin
+      @cart = Cart.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      logger.error "Attempt to edit invalid cart: #{params[:id]}"
+      redirect_to carts_url, notice: "Invalid cart"
+    end
   end
 
   # POST /carts

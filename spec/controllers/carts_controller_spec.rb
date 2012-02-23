@@ -44,10 +44,16 @@ describe CartsController do
   end
 
   describe "GET show" do
-    it "assigns the requested cart as @cart" do
+    it "should assign the requested cart as @cart" do
       cart = Cart.create! valid_attributes
       get :show, {:id => cart.to_param}, valid_session
       assigns(:cart).should eq(cart)
+    end
+
+    it "should redirect with notice to the store when invalid id was taken" do
+      get :show, {id: "invalid_id"}, valid_session
+      response.should redirect_to(store_url)
+      flash[:notice].should_not be_empty
     end
   end
 
@@ -59,10 +65,16 @@ describe CartsController do
   end
 
   describe "GET edit" do
-    it "assigns the requested cart as @cart" do
+    it "should assign the requested cart as @cart" do
       cart = Cart.create! valid_attributes
       get :edit, {:id => cart.to_param}, valid_session
       assigns(:cart).should eq(cart)
+    end
+
+    it "should redirect with notice to the carts list when invalid id was taken" do
+      get :edit, {id: "invalid_id"}, valid_session
+      response.should redirect_to(carts_url)
+      flash[:notice].should_not be_empty
     end
   end
 
@@ -160,7 +172,7 @@ describe CartsController do
       }.to change(Cart, :count).by(-1)
     end
 
-    it "should redirect to the carts list" do
+    it "should redirect to the store" do
       delete :destroy, {id: @cart}, @sess
       response.should redirect_to(store_url)
     end

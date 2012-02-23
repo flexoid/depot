@@ -28,6 +28,12 @@ describe LineItemsController do
       get :show, {id: @line_item}, valid_session
       assigns(:line_item).should eq(@line_item)
     end
+
+    it "should redirect with notice to the line items list when invalid id was taken" do
+      get :show, {id: "invalid_id"}, valid_session
+      response.should redirect_to(line_items_url)
+      flash[:notice].should_not be_empty
+    end
   end
 
   describe "GET new" do
@@ -47,6 +53,12 @@ describe LineItemsController do
     it "should assign the requested line_item as @line_item" do
       get :edit, {id: @line_item}, valid_session
       assigns(:line_item).should eq(@line_item)
+    end
+
+    it "should redirect with notice to the line items list when invalid id was taken" do
+      get :edit, {id: "invalid_id"}, valid_session
+      response.should redirect_to(line_items_url)
+      flash[:notice].should_not be_empty
     end
   end
 

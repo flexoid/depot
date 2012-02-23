@@ -13,11 +13,16 @@ class LineItemsController < ApplicationController
   # GET /line_items/1
   # GET /line_items/1.json
   def show
-    @line_item = LineItem.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @line_item }
+    begin
+      @line_item = LineItem.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      logger.error "Attempt to show invalid line_item: #{params[:id]}"
+      redirect_to line_items_url, notice: "Invalid line item"
+    else
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @line_item }
+      end
     end
   end
 
@@ -34,7 +39,12 @@ class LineItemsController < ApplicationController
 
   # GET /line_items/1/edit
   def edit
-    @line_item = LineItem.find(params[:id])
+     begin
+      @line_item = LineItem.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      logger.error "Attempt to edit invalid line_item: #{params[:id]}"
+      redirect_to line_items_url, notice: "Invalid line item"
+    end
   end
 
   # POST /line_items

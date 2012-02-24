@@ -21,3 +21,6 @@
 
 # Dragonfly files
 /public/system
+
+# Database config
+/config/database.yml

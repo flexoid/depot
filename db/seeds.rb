@@ -1,5 +1,4 @@
-Product.delete_all
-Product.create(title: 'CoffeeScript',
+Product.create!(title: 'CoffeeScript',
   description:
     %{<p>
         CoffeeScript is JavaScript done right. It provides all of JavaScript's
@@ -11,7 +10,7 @@ Product.create(title: 'CoffeeScript',
   image: Pathname.new('app/assets/images/cs.jpg'),
   price: 36.00)
 
-Product.create(title: 'Programming Ruby 1.9',
+Product.create!(title: 'Programming Ruby 1.9',
   description:
     %{<p>
         Ruby is the fastest growing and most exciting dynamic language
@@ -21,7 +20,7 @@ Product.create(title: 'Programming Ruby 1.9',
   image: Pathname.new('app/assets/images/ruby.jpg'),
   price: 49.95)
 
-Product.create(title: 'Rails Test Prescriptions',
+Product.create!(title: 'Rails Test Prescriptions',
   description:
     %{<p>
         <em>Rails Test Prescriptions</em> is a comprehensive guide to testing
@@ -34,13 +33,11 @@ Product.create(title: 'Rails Test Prescriptions',
   image: Pathname.new('app/assets/images/rtp.jpg'),
   price: 34.95)
 
-Cart.delete_all
 3.times do
   Cart.create!
 end
 
 
-LineItem.delete_all
 LineItem.create!(product: Product.all[0], cart: Cart.all[0])
 LineItem.create!(product: Product.all[1], cart: Cart.all[1])
 LineItem.create!(product: Product.all[2], cart: Cart.all[2])
@@ -49,5 +46,5 @@ LineItem.create!(product: Product.all[2], cart: Cart.all[1])
 
 LineItem.all.each do |item|
   item.quantity = rand(1..3)
-  item.save
+  item.save!
 end

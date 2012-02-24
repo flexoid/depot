@@ -9,7 +9,9 @@ describe LineItem do
   end
 
   it "should create a new line_item given valid attr" do
-    LineItem.create!(@attr.merge(cart_id: @cart, product_id: @product))
+    expect {
+      LineItem.create(@attr.merge(cart: @cart, product: @product))
+    }.to change(LineItem, :count).by(1)
   end
 
   it "should be associated with cart" do

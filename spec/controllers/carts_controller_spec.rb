@@ -163,12 +163,12 @@ describe CartsController do
 
     before(:each) do
       @cart = Factory(:cart)
-      @sess = valid_session.merge(cart_id: @cart)
+      @session = valid_session.merge(cart_id: @cart)
     end
 
     it "should destroy the user's cart" do
       expect {
-        delete :destroy, {id: @cart}, @sess
+        delete :destroy, {id: @cart}, @session
       }.to change(Cart, :count).by(-1)
     end
 

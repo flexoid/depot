@@ -4,11 +4,11 @@ describe LineItem do
 
   before(:each) do
     @attr = Factory.attributes_for :line_item
-    @cart = Factory(:cart)
-    @product = Factory(:product)
   end
 
   it "should create a new line_item given valid attr" do
+    @cart = Factory(:cart)
+    @product = Factory(:product)
     expect {
       LineItem.create(@attr.merge(cart: @cart, product: @product))
     }.to change(LineItem, :count).by(1)

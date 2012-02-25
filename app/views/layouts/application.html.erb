@@ -16,13 +16,15 @@
   <div id="columns">
     <div id="side">
       <span id="datetime"><%= date_time %></span>
+
+      <div id="cart">
+        <%= render current_cart %>
+      </div>
+
       <ul>
         <li><%= link_to 'Store', store_path %></li>
         <li><a href="#">Contact</a></li>
       </ul>
-      <div id="cart">
-        <%= cart_link %>
-      </div>
     </div>
     <div id="main">
       <%= yield %>

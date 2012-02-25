@@ -13,7 +13,7 @@ describe "Products" do
           fill_in "Description",  :with => ""
           attach_file "product_image", File.join(Rails.root, "app/assets/images/ruby.jpg")
           fill_in "Price",        :with => ""
-          click_button
+          click_button "Create Product"
           response.should render_template('products/new')
           # response.should have_selector("div#error_explanation")
         end.should_not change(Product, :count)
@@ -30,7 +30,7 @@ describe "Products" do
           fill_in "Description",  :with => @product[:description]
           attach_file "product_image", File.join(Rails.root, "app/assets/images/ruby.jpg")
           fill_in "Price",        :with => @product[:price]
-          click_button
+          click_button "Create Product"
           response.should have_selector("p#notice", :content => "Product was successfully created.")
           response.should render_template('products/show')
         end.should change(Product, :count).by(1)
@@ -53,7 +53,7 @@ describe "Products" do
           fill_in "Description",  :with => ""
           attach_file "product_image", File.join(Rails.root, "app/assets/images/ruby.jpg")
           fill_in "Price",        :with => ""
-          click_button
+          click_button "Update Product"
           response.should render_template('products/edit')
           # response.should have_selector("div#error_explanation")
           @product.reload
@@ -70,7 +70,7 @@ describe "Products" do
           fill_in "Description",  :with => @product[:description]
           attach_file "product_image", File.join(Rails.root, "app/assets/images/ruby.jpg")
           fill_in "Price",        :with => @product[:price]
-          click_button
+          click_button "Update Product"
           response.should have_selector("p#notice", :content => "Product was successfully updated.")
           response.should render_template('products/show')
           @product.reload

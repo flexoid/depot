@@ -82,15 +82,15 @@ describe LineItemsController do
         assigns(:line_item).should be_persisted
       end
 
-      it "should redirect to the cart associated with created line_item" do
+      it "should redirect to the store" do
         post :create, {product_id: @product}, valid_session
-        response.should redirect_to(LineItem.last.cart)
+        response.should redirect_to(store_path)
       end
     end
 
     describe "with invalid params" do
 
-      it "should not create a )ew line_item with invalid product_id" do
+      it "should not create a new line_item with invalid product_id" do
         expect {
           post :create, {product_id: nil}, valid_session
         }.not_to change(Product, :count)
@@ -166,10 +166,10 @@ describe LineItemsController do
       }.to change(LineItem, :count).by(-1)
     end
 
-    it "should redirect with notice to the cart to which the item belonged" do
+    it "should redirect to the store" do
       cart = @line_item.cart
       delete :destroy, {id: @line_item}, valid_session
-      response.should redirect_to(cart_url(cart))
+      response.should redirect_to(store_path)
     end
   end
 

@@ -39,7 +39,7 @@
   background: #141;
 
   #main {
-    margin-left: 17em;
+    margin-left: 23em;
     padding: 1em;
     background: white;
   }
@@ -47,7 +47,7 @@
   #side {
     float: left;
     padding: 1em 2em;
-    width: 13em;
+    width: 19em;
     background: #141;
 
     #datetime {
@@ -55,10 +55,14 @@
     }
 
     #cart {
-      margin-top: 40px;
+      margin-top: 10px;
+      font-size: smaller;
+      color: white;
 
-      a {
-        color: #bfb;
+      table {
+        border-top: 1px dotted #595;
+        border-bottom: 1px dotted #595;
+        margin-bottom: 10px;
       }
     }
 

@@ -3,13 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .products {
-  table {
+  table#listing {
     border-collapse: collapse;
-  }
 
-  table tr td {
-    padding: 5px;
-    vertical-align: top;
+    tr td {
+      padding: 5px;
+      vertical-align: top;
+    }
   }
 
   .list_image {

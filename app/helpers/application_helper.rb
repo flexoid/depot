@@ -9,4 +9,8 @@ module ApplicationHelper
       link_to (image_tag product.image.thumb(geometry).url, class: image_class), product.image.url
     end
   end
+
+  def cart_link
+    link_to "Cart (#{pluralize(current_cart.total_count, 'item')})", cart_path(current_cart)
+  end
 end

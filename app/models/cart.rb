@@ -15,4 +15,8 @@ class Cart < ActiveRecord::Base
   def total_price
     line_items.to_a.sum { |item| item.total_price }
   end
+
+  def total_count
+    line_items.inject(0) { |result, item| result + item.quantity }
+  end
 end

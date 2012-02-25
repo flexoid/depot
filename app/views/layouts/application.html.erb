@@ -10,18 +10,19 @@
 </head>
 <body class="<%= controller.controller_name %>">
   <div id="banner">
-    <%= image_tag("logo.png") %>
+    <%= link_to image_tag("logo.png"), store_path %>
     <%= @page_title || "Pragmatic Bookshelf" %>
   </div>
   <div id="columns">
     <div id="side">
       <span id="datetime"><%= date_time %></span>
       <ul>
-        <li><a href="http://www....">Home</a></li>
-        <li><a href="http://www..../faq">Questions</a></li>
-        <li><a href="http://www..../news">News</a></li>
-        <li><a href="http://www..../contact">Contact</a></li>
+        <li><%= link_to 'Store', store_path %></li>
+        <li><a href="#">Contact</a></li>
       </ul>
+      <div id="cart">
+        <%= cart_link %>
+      </div>
     </div>
     <div id="main">
       <%= yield %>

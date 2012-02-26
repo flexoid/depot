@@ -1,0 +1,5 @@
+<% if current_cart.line_items.empty? %>
+  $('#cart').hide('blind', 1000);
+<% else %>
+  $('#cart').html("<%=j render current_cart %>");
+<% end %>

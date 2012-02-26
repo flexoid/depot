@@ -17,8 +17,10 @@
     <div id="side">
       <span id="datetime"><%= date_time %></span>
 
-      <%= hidden_div_if(current_cart.line_items.empty?, id: 'cart') do %>
-        <%= render current_cart %>
+      <% if @cart %>
+        <%= hidden_div_if(current_cart.line_items.empty?, id: 'cart') do %>
+          <%= render current_cart %>
+        <% end %>
       <% end %>
 
       <ul>

@@ -31,6 +31,11 @@ describe StoreController do
         end
       end
     end
+
+    it "should show cart in the sidebar" do
+      get 'index'
+      response.should have_selector("#side > #cart")
+    end
   end
 
 end

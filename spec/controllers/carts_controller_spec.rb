@@ -19,7 +19,6 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe CartsController do
-  render_views
 
   # This should return the minimal set of attributes required to create a valid
   # Cart. As you add validations to Cart, be sure to
@@ -40,6 +39,15 @@ describe CartsController do
       cart = Cart.create! valid_attributes
       get :index, {}, valid_session
       assigns(:carts).should eq([cart])
+    end
+
+    context "with render views" do
+      render_views
+
+      it "should not show cart in the sidebar" do
+        get 'index'
+        response.should_not have_selector("#side > #cart")
+      end
     end
   end
 

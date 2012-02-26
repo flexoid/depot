@@ -38,6 +38,11 @@ describe ProductsController do
         response.should have_selector("a", href: product_path(product), content: 'Destroy')
       end
     end
+
+    it "should not show cart in the sidebar" do
+      get 'index'
+      response.should_not have_selector("#side > #cart")
+    end
   end
 
   describe "GET show" do

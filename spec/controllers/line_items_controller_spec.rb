@@ -16,6 +16,15 @@ describe LineItemsController do
       get :index, {}, valid_session
       assigns(:line_items).should eq(@line_items)
     end
+
+    context "with render views" do
+      render_views
+
+      it "should not show cart in the sidebar" do
+        get 'index'
+        response.should_not have_selector("#side > #cart")
+      end
+    end
   end
 
   describe "GET show" do

@@ -13,4 +13,11 @@ module ApplicationHelper
   def cart_link
     link_to "Cart (#{pluralize(current_cart.total_count, 'item')})", cart_path(current_cart)
   end
+
+  def hidden_div_if(condition, attributes = {}, &block)
+    if condition
+      attributes["style"] = "display: none"
+    end
+    content_tag("div", attributes, &block)
+  end
 end

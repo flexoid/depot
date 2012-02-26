@@ -17,9 +17,9 @@
     <div id="side">
       <span id="datetime"><%= date_time %></span>
 
-      <div id="cart">
+      <%= hidden_div_if(current_cart.line_items.empty?, id: 'cart') do %>
         <%= render current_cart %>
-      </div>
+      <% end %>
 
       <ul>
         <li><%= link_to 'Store', store_path %></li>

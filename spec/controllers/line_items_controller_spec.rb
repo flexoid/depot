@@ -165,17 +165,23 @@ describe LineItemsController do
 
   describe "DELETE destroy" do
 
-    before(:each) do
-      @line_item = Factory(:line_item)
-    end
-
-    it "should destroy the requested line_item" do
+    it "should destroy the requested line_item with quantity 1" do
+      @line_item = Factory(:line_item, quantity: 1)
       expect {
         delete :destroy, {id: @line_item}, valid_session
       }.to change(LineItem, :count).by(-1)
     end
 
+    it "should decrease quantity of the requested line item with quantity > 1" do
+      @line_item = Factory(:line_item, quantity: 4)
+      expect {
+        delete :destroy, {id: @line_item}, valid_session
+        @line_item.reload
+      }.to change(@line_item, :quantity).by(-1)
+    end
+
     it "should redirect to the store" do
+      @line_item = Factory(:line_item)
       cart = @line_item.cart
       delete :destroy, {id: @line_item}, valid_session
       response.should redirect_to(store_path)

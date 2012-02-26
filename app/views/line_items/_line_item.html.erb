@@ -8,6 +8,6 @@
   <td><%= line_item.product.title %></td>
   <td class="item_price"><%= number_to_currency(line_item.total_price) %></td>
   <td>
-    <%= button_to 'Delete', line_item, method: :delete, remote: true %>
+    <%= button_to '-', line_item, method: :delete, remote: true %>
   </td>
 </tr>

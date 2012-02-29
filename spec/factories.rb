@@ -15,4 +15,10 @@ FactoryGirl.define do
     cart
     quantity Random.rand(1..3)
   end
+
+  factory :user do
+    sequence(:name) { |v| "User #{v}" }
+    sequence(:email) { |v| "user#{v}@mail.com" }
+    password Array.new(8) { Random.rand(0..9) }.join
+  end
 end

@@ -48,3 +48,8 @@ LineItem.all.each do |item|
   item.quantity = rand(1..3)
   item.save!
 end
+
+
+User.create!(name: "John Smith", email: "johnny@xmail.com", password: "qwerty")
+User.create!(name: "Michael Corleone", email: "corleones@mafia.org", password: "pepperoni")
+User.create!(name: "Bruce Wayne", email: "brucewayne@megamail.net", password: "batmanforever")

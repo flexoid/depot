@@ -31,7 +31,7 @@ describe "Products" do
           attach_file "product_image", File.join(Rails.root, "app/assets/images/ruby.jpg")
           fill_in "Price",        :with => @product[:price]
           click_button "Create Product"
-          response.should have_selector("p#notice", :content => "Product was successfully created.")
+          response.should have_selector(".notice", :content => "Product was successfully created.")
           response.should render_template('products/show')
         end.should change(Product, :count).by(1)
       end
@@ -71,7 +71,7 @@ describe "Products" do
           attach_file "product_image", File.join(Rails.root, "app/assets/images/ruby.jpg")
           fill_in "Price",        :with => @product[:price]
           click_button "Update Product"
-          response.should have_selector("p#notice", :content => "Product was successfully updated.")
+          response.should have_selector(".notice", :content => "Product was successfully updated.")
           response.should render_template('products/show')
           @product.reload
         end.should change(@product, :title).from(@product[:title]).to(@product[:title] + " New Release")

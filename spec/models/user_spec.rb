@@ -30,4 +30,15 @@ describe User do
     User.new(@attr.merge(password: "")).should_not be_valid
     User.new(@attr.merge(password: "short")).should_not be_valid
   end
+
+  it "should require valid role" do
+    User.new(@attr.merge(role: ""), as: :admin).should_not be_valid
+    User.new(@attr.merge(role: "visitor"), as: :admin).should_not be_valid
+  end
+
+  it "shouldn't accept role attribute from non-admin user" do
+    expect {
+      User.new(@attr.merge(role: "admin"))
+    }.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
+  end
 end

@@ -16,9 +16,16 @@ FactoryGirl.define do
     quantity Random.rand(1..3)
   end
 
-  factory :user do
+  factory :user do |f|
     sequence(:name) { |v| "User #{v}" }
     sequence(:email) { |v| "user#{v}@mail.com" }
     password Array.new(8) { Random.rand(0..9) }.join
+  end
+
+  factory :admin, parent: :user do |f|
+    f.after_create do |user|
+      user.role = "admin"
+      user.save
+    end
   end
 end

@@ -49,7 +49,12 @@ LineItem.all.each do |item|
   item.save!
 end
 
-
-User.create!(name: "John Smith", email: "johnny@xmail.com", password: "qwerty")
-User.create!(name: "Michael Corleone", email: "corleones@mafia.org", password: "pepperoni")
-User.create!(name: "Bruce Wayne", email: "brucewayne@megamail.net", password: "batmanforever")
+users = [
+  {name: "John Smith", email: "john@mail.com", password: "qwerty", role: "user"},
+  {name: "Michael Corleone", email: "corleones@mafia.org", password: "pepperoni", role: "user"},
+  {name: "Bruce Wayne", email: "brucewayne@megamail.net", password: "batmanforever", role: "user"},
+  {name: "Admin", email: "admin@site.com", password: "administrator", role: "admin"}
+]
+users.each do |user|
+  User.create!(user, without_protection: true)
+end

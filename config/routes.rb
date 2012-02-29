@@ -1,5 +1,14 @@
 Depot::Application.routes.draw do
-  devise_for :users
+  devise_for :users, skip: :registrations do
+    resource :registration,
+      only: [:new, :create, :edit, :update],
+      path: 'users',
+      path_names: { new: 'sign_up' },
+      controller: 'devise/registrations',
+      as: :user_registration do
+      get :cancel
+    end
+  end
 
   resources :line_items
 

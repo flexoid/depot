@@ -59,7 +59,25 @@
     background: #141;
 
     #datetime {
-      color: #bfb
+      color: #bfb;
+    }
+
+    #user_bar {
+      margin-top: 10px;
+      padding: 5px;
+      color: #bfb;
+
+      border-width: 1px 0;
+      border-style: dotted;
+      border-color: #595;
+
+      a {
+        color: #bfb;
+      }
+
+      span#email {
+        font-style:italic;
+      }
     }
 
     #cart {

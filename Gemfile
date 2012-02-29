@@ -5,6 +5,7 @@ gem 'mysql2'
 gem 'formtastic', git: 'git://github.com/justinfrench/formtastic.git', branch: "2.1-stable"
 gem 'rack-cache', :require => 'rack/cache'
 gem 'dragonfly', '~>0.9.10'
+gem 'devise', '~>2.0.4'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

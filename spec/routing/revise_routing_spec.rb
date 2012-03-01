@@ -12,7 +12,8 @@ describe "Routing" do
     end
 
     it "routes to #destroy" do
-      delete("/users/sign_out").should route_to("devise/sessions#destroy")
+      get("/users/sign_out").should route_to("devise/sessions#destroy") # Only for test environment
+      #delete("/users/sign_out").should route_to("devise/sessions#destroy")
     end
   end
 

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require "cancan/matchers"
 
 describe LineItemsController do
 
@@ -6,9 +7,16 @@ describe LineItemsController do
     {}
   end
 
+  before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    @controller.stub(:current_ability).and_return(@ability)
+  end
+
   describe "GET index" do
 
     before(:each) do
+      @ability.can :read, LineItem
       @line_items = FactoryGirl.create_list(:line_item, 3)
     end
 
@@ -30,6 +38,7 @@ describe LineItemsController do
   describe "GET show" do
 
     before(:each) do
+      @ability.can :read, LineItem
       @line_item = Factory(:line_item)
     end
 
@@ -38,10 +47,10 @@ describe LineItemsController do
       assigns(:line_item).should eq(@line_item)
     end
 
-    it "should redirect with notice to the line items list when invalid id was taken" do
+    it "should redirect with alert to the store when invalid id was taken" do
       get :show, {id: "invalid_id"}, valid_session
-      response.should redirect_to(line_items_url)
-      flash[:notice].should_not be_empty
+      response.should redirect_to(store_url)
+      flash[:alert].should_not be_empty
     end
   end
 
@@ -56,6 +65,7 @@ describe LineItemsController do
   describe "GET edit" do
 
     before(:each) do
+      @ability.can :update, LineItem
       @line_item = Factory(:line_item)
     end
 
@@ -64,10 +74,10 @@ describe LineItemsController do
       assigns(:line_item).should eq(@line_item)
     end
 
-    it "should redirect with notice to the line items list when invalid id was taken" do
+    it "should redirect with alert to the store when invalid id was taken" do
       get :edit, {id: "invalid_id"}, valid_session
-      response.should redirect_to(line_items_url)
-      flash[:notice].should_not be_empty
+      response.should redirect_to(store_url)
+      flash[:alert].should_not be_empty
     end
   end
 
@@ -115,6 +125,10 @@ describe LineItemsController do
   end
 
   describe "PUT update" do
+
+    before(:each) do
+      @ability.can :update, LineItem
+    end
 
     describe "with valid params" do
 

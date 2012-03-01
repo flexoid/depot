@@ -1,4 +1,6 @@
 class StoreController < ApplicationController
+  skip_authorization_check
+
   def index
     @products = Product.order(:title)
     @cart = current_cart

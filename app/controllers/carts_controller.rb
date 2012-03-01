@@ -1,9 +1,12 @@
 class CartsController < ApplicationController
+  load_and_authorize_resource
+  skip_authorize_resource only: [:create, :destroy]
+  skip_load_resource only: :destroy
+  skip_authorization_check only: [:create, :destroy]
+
   # GET /carts
   # GET /carts.json
   def index
-    @carts = Cart.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @carts }
@@ -13,24 +16,15 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
-    begin
-      @cart = Cart.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      logger.error "Attempt to access invalid cart: #{params[:id]}"
-      redirect_to store_url, notice: "Invalid cart"
-    else
-      respond_to do |format|
-        format.html # show.html.erb
-        format.json { render json: @cart }
-      end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @cart }
     end
   end
 
   # GET /carts/new
   # GET /carts/new.json
   def new
-    @cart = Cart.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @cart }
@@ -39,19 +33,11 @@ class CartsController < ApplicationController
 
   # GET /carts/1/edit
   def edit
-    begin
-      @cart = Cart.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      logger.error "Attempt to edit invalid cart: #{params[:id]}"
-      redirect_to carts_url, notice: "Invalid cart"
-    end
   end
 
   # POST /carts
   # POST /carts.json
   def create
-    @cart = Cart.new(params[:cart])
-
     respond_to do |format|
       if @cart.save
         format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
@@ -66,8 +52,6 @@ class CartsController < ApplicationController
   # PUT /carts/1
   # PUT /carts/1.json
   def update
-    @cart = Cart.find(params[:id])
-
     respond_to do |format|
       if @cart.update_attributes(params[:cart])
         format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }

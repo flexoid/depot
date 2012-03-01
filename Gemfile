@@ -6,6 +6,7 @@ gem 'formtastic', git: 'git://github.com/justinfrench/formtastic.git', branch: "
 gem 'rack-cache', :require => 'rack/cache'
 gem 'dragonfly', '~>0.9.10'
 gem 'devise', '~>2.0.4'
+gem 'cancan', '~>1.6.7'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

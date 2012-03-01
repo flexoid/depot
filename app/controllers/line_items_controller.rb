@@ -1,9 +1,12 @@
 class LineItemsController < ApplicationController
+  load_and_authorize_resource
+  skip_load_resource only: :create
+  skip_authorize_resource only: [:create, :destroy]
+  skip_authorization_check only: [:create, :destroy]
+
   # GET /line_items
   # GET /line_items.json
   def index
-    @line_items = LineItem.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @line_items }
@@ -13,24 +16,15 @@ class LineItemsController < ApplicationController
   # GET /line_items/1
   # GET /line_items/1.json
   def show
-    begin
-      @line_item = LineItem.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      logger.error "Attempt to show invalid line_item: #{params[:id]}"
-      redirect_to line_items_url, notice: "Invalid line item"
-    else
-      respond_to do |format|
-        format.html # show.html.erb
-        format.json { render json: @line_item }
-      end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @line_item }
     end
   end
 
   # GET /line_items/new
   # GET /line_items/new.json
   def new
-    @line_item = LineItem.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @line_item }
@@ -39,12 +33,6 @@ class LineItemsController < ApplicationController
 
   # GET /line_items/1/edit
   def edit
-     begin
-      @line_item = LineItem.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      logger.error "Attempt to edit invalid line_item: #{params[:id]}"
-      redirect_to line_items_url, notice: "Invalid line item"
-    end
   end
 
   # POST /line_items
@@ -73,8 +61,6 @@ class LineItemsController < ApplicationController
   # PUT /line_items/1
   # PUT /line_items/1.json
   def update
-    @line_item = LineItem.find(params[:id])
-
     respond_to do |format|
       if @line_item.update_attributes(params[:line_item])
         format.html { redirect_to @line_item, notice: 'Line item was successfully updated.' }
@@ -89,7 +75,6 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
-    @line_item = LineItem.find(params[:id])
     if @line_item.quantity > 1
       @line_item.quantity -= 1
       @line_item.save

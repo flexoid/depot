@@ -1,4 +1,5 @@
 require 'spec_helper'
+require "cancan/matchers"
 
 describe ProductsController do
   render_views
@@ -7,9 +8,16 @@ describe ProductsController do
     {}
   end
 
+  before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    @controller.stub(:current_ability).and_return(@ability)
+  end
+
   describe "GET index" do
 
     before(:each) do
+      @ability.can :read, Product
       @products = FactoryGirl.create_list(:product, 5)
     end
 
@@ -48,6 +56,7 @@ describe ProductsController do
   describe "GET show" do
 
     before(:each) do
+      @ability.can :read, Product
       @product = Factory(:product)
     end
 
@@ -75,14 +84,18 @@ describe ProductsController do
       response.should have_selector("a", href: products_path)
     end
 
-    it "should redirect with notice to the store when invalid id was taken" do
+    it "should redirect with alert to the store when invalid id was taken" do
       get :show, {id: "invalid_id"}, valid_session
       response.should redirect_to(store_url)
-      flash[:notice].should_not be_empty
+      flash[:alert].should_not be_empty
     end
   end
 
   describe "GET new" do
+
+    before(:each) do
+      @ability.can :create, Product
+    end
 
     it "should be successful" do
       get :new
@@ -98,6 +111,7 @@ describe ProductsController do
   describe "GET edit" do
 
     before(:each) do
+      @ability.can :update, Product
       @product = Factory(:product)
     end
 
@@ -111,14 +125,18 @@ describe ProductsController do
       assigns(:product).should eq(@product)
     end
 
-    it "should redirect with notice to the products list when invalid id was taken" do
+    it "should redirect with alert to the store when invalid id was taken" do
       get :edit, {id: "invalid_id"}, valid_session
-      response.should redirect_to(products_url)
-      flash[:notice].should_not be_empty
+      response.should redirect_to(store_url)
+      flash[:alert].should_not be_empty
     end
   end
 
   describe "POST create" do
+
+    before(:each) do
+      @ability.can :create, Product
+    end
 
     describe "with valid params" do
 
@@ -158,6 +176,10 @@ describe ProductsController do
   end
 
   describe "PUT update" do
+
+    before(:each) do
+      @ability.can :update, Product
+    end
 
     describe "with valid params" do
 
@@ -205,6 +227,7 @@ describe ProductsController do
   describe "DELETE destroy" do
 
     before(:each) do
+      @ability.can :destroy, Product
       @product = Factory(:product)
     end
 

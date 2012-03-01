@@ -2,6 +2,17 @@ require 'spec_helper'
 
 describe "Products" do
 
+  before(:each) do
+    visit destroy_user_session_path # ensure that
+
+    admin = Factory(:admin)
+
+    visit new_user_session_path
+    fill_in "user_email",    with: admin.email
+    fill_in "user_password", with: admin.password
+    click_button "Sign in"
+  end
+
   describe "creation" do
 
     describe "failure" do

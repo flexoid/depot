@@ -1,0 +1,15 @@
+<% if params[:action] == 'new' %>
+  <% @required = true %>
+<% else %>
+  <% @required = false %>
+<% end %>
+
+<%= semantic_form_for(@user) do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :name, required: @required %>
+    <%= f.input :email, required: @required %>
+    <%= f.input :password, required: @required %>
+    <%= f.input :password_confirmation, required: @required %>
+  <% end %>
+  <%= f.actions %>
+<% end %>

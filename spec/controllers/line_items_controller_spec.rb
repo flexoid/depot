@@ -7,11 +7,7 @@ describe LineItemsController do
     {}
   end
 
-  before(:each) do
-    @ability = Object.new
-    @ability.extend(CanCan::Ability)
-    @controller.stub(:current_ability).and_return(@ability)
-  end
+  ability_init
 
   describe "GET index" do
 

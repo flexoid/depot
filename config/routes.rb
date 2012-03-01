@@ -12,13 +12,12 @@ Depot::Application.routes.draw do
     end
   end
 
-  resources :line_items
-
-  resources :carts
-
   get "store/index"
+  resources :products, :carts, :line_items
 
-  resources :products
+  namespace :admin do
+    resources :users
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

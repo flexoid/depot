@@ -8,11 +8,7 @@ describe ProductsController do
     {}
   end
 
-  before(:each) do
-    @ability = Object.new
-    @ability.extend(CanCan::Ability)
-    @controller.stub(:current_ability).and_return(@ability)
-  end
+  ability_init
 
   describe "GET index" do
 
@@ -179,12 +175,12 @@ describe ProductsController do
 
     before(:each) do
       @ability.can :update, Product
+      @product = Factory(:product)
     end
 
     describe "with valid params" do
 
       before(:each) do
-        @product = Factory(:product)
         @attr = Factory.attributes_for(:product, description: "Some description")
       end
 
@@ -207,7 +203,6 @@ describe ProductsController do
     describe "with invalid params" do
 
       before (:each) do
-        @product = Factory(:product)
         # Trigger the behavior that occurs when invalid params are submitted
         Product.any_instance.stub(:save).and_return(false)
       end

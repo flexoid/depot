@@ -2,19 +2,17 @@ en:
   formtastic:
     labels:
       user:
-        edit:
-          password: "New password"
-          password_confirmation: "Confirm new password"
-      product:
-        image_url: "Image URL"
+        new_password: "New password"
+        new_password_confirmation: "Confirm new password"
+        product:
+          image_url: "Image URL"
     hints:
       product:
         title: "More than 10 characters long"
         image_url: "Only jpg, png or gif image"
       user:
-        edit:
-          password: "Leave blank if you don't want to change it"
-          current_password: "We need your current password to confirm your changes"
+        new_password: "Leave blank if you don't want to change it"
+        current_password: "We need your current password to confirm your changes"
     actions:
       sign_up: "Sign up"
       sign_in: "Sign in"

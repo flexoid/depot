@@ -82,7 +82,6 @@
     }
 
     #cart {
-      margin-top: 10px;
       font-size: smaller;
       color: white;
 
@@ -91,6 +90,10 @@
         border-bottom: 1px dotted #595;
         margin-bottom: 10px;
         width: 100%;
+
+        td.item_title {
+          width: 100%;
+        }
       }
     }
 

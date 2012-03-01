@@ -66,7 +66,7 @@ class ProductsController < ApplicationController
     @product.destroy
 
     respond_to do |format|
-      format.html { redirect_to products_url }
+      format.html { redirect_to products_url, notice: "An Error Occurred! #{@product.errors[:base].join('; ').capitalize}" }
       format.json { head :no_content }
     end
   end

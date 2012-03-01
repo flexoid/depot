@@ -43,7 +43,7 @@ describe Product do
     Product.new(@attr.merge(title: "7 chars")).should_not be_valid
   end
 
-  describe "line_items associations" do
+  describe "line_items associations:" do
 
     before(:each) do
       @product = Factory(:product)
@@ -56,6 +56,12 @@ describe Product do
 
     it "should have the right line_items" do
       @product.line_items.should eq(@line_items)
+    end
+
+    it "shouldn't be destroyed if has associated line items" do
+      expect {
+        @product.destroy
+      }.not_to change(Product, :count)
     end
   end
 end

@@ -24,6 +24,13 @@
         <li><a href="#">Contact</a></li>
       </ul>
 
+      <% if current_user.try(:role) == 'admin' %>
+        <ul>
+          <li><%= link_to 'Products', products_path %></li>
+          <li><%= link_to 'Users', admin_users_path %></li>
+        </ul>
+      <% end %>
+
       <% if @cart %>
         <%= hidden_div_if(current_cart.line_items.empty?, id: 'cart') do %>
           <%= render current_cart %>

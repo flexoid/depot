@@ -5,7 +5,7 @@
   <%= f.inputs do %>
     <%= f.input :name %>
     <%= f.input :email %>
-    <%= f.input :password, label: :new_password %>
+    <%= f.input :password, label: :new_password, hint: :new_password %>
     <%= f.input :password_confirmation, label: :new_password_confirmation %>
     <%= f.input :current_password, required: true %>
   <% end %>

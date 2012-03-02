@@ -4,7 +4,7 @@
   <% @required = false %>
 <% end %>
 
-<%= semantic_form_for(@user) do |f| %>
+<%= semantic_form_for([:admin, @user]) do |f| %>
   <%= f.inputs do %>
     <%= f.input :name, required: @required %>
     <%= f.input :email, required: @required %>

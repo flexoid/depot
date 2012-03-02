@@ -50,10 +50,11 @@ LineItem.all.each do |item|
 end
 
 users = [
-  {name: "John Smith", email: "john@mail.com", password: "qwerty", role: "user"},
-  {name: "Michael Corleone", email: "corleones@mafia.org", password: "pepperoni", role: "user"},
-  {name: "Bruce Wayne", email: "brucewayne@megamail.net", password: "batmanforever", role: "user"},
-  {name: "Admin", email: "admin@site.com", password: "administrator", role: "admin"}
+  {name: "John Smith", email: "john@example.com", password: "password", role: "user"},
+  {name: "Michael Corleone", email: "michael@example.com", password: "password", role: "user"},
+  {name: "Bruce Wayne", email: "bruce@example.com", password: "password", role: "user"},
+
+  {name: "Admin", email: "admin@example.com", password: "password", role: "admin"}
 ]
 users.each do |user|
   User.create!(user, without_protection: true)

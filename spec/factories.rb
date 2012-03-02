@@ -18,8 +18,8 @@ FactoryGirl.define do
 
   factory :user do |f|
     sequence(:name) { |v| "User #{v}" }
-    sequence(:email) { |v| "user#{v}@mail.com" }
-    password Array.new(8) { Random.rand(0..9) }.join
+    sequence(:email) { |v| "user#{v}@example.com" }
+    password "password"
   end
 
   factory :admin, parent: :user do |f|

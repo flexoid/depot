@@ -40,7 +40,7 @@ describe Admin::UsersController do
       @ability.can :create, User
     end
 
-    it "assigns a new user as @user" do
+    it "should assign a new user as @user" do
       get :new, {}, valid_session
       assigns(:user).should be_a_new(User)
     end

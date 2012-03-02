@@ -1,3 +1,5 @@
+include Admin::UsersHelper
+
 class Admin::UsersController < ApplicationController
   load_and_authorize_resource
 
@@ -53,6 +55,8 @@ class Admin::UsersController < ApplicationController
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
     end
+
+    @user.accessible = [:role] if can? :set_role, @user
 
     respond_to do |format|
       if @user.update_attributes(params[:user])

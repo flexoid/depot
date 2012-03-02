@@ -24,12 +24,14 @@
         <li><a href="#">Contact</a></li>
       </ul>
 
-      <% if current_user.try(:role) == 'admin' %>
-        <ul>
+      <ul>
+        <% if can? :read, Product %>
           <li><%= link_to 'Products', products_path %></li>
+        <% end %>
+        <% if can? :read, User %>
           <li><%= link_to 'Users', admin_users_path %></li>
-        </ul>
-      <% end %>
+        <% end %>
+      </ul>
 
       <% if @cart %>
         <%= hidden_div_if(current_cart.line_items.empty?, id: 'cart') do %>

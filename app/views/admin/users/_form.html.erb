@@ -2,6 +2,7 @@
   <%= f.inputs do %>
     <%= f.input :name %>
     <%= f.input :email %>
+    <%= f.input :role, include_blank: false, selected: role(@user), collection: roles_collection if can?(:set_role, User) %>
     <%= f.input :password, hint: :new_password %>
     <%= f.input :password_confirmation %>
   <% end %>

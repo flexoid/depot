@@ -1,4 +1,5 @@
 require 'spec_helper'
+require "cancan/matchers"
 
 describe User do
 
@@ -32,13 +33,19 @@ describe User do
   end
 
   it "should require valid role" do
-    User.new(@attr.merge(role: ""), as: :admin).should_not be_valid
-    User.new(@attr.merge(role: "visitor"), as: :admin).should_not be_valid
+    User.new(@attr.merge(role: ""), without_protection: true).should_not be_valid
+    User.new(@attr.merge(role: "visitor"), without_protection: true).should_not be_valid
   end
 
-  it "shouldn't accept role attribute from non-admin user" do
+  it "should protect role attribute from mass-assignment" do
     expect {
       User.new(@attr.merge(role: "admin"))
     }.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
+  end
+
+  it "should allow to change role attribute with access permission" do
+    user = User.new
+    user.accessible = [:role]
+    user.update_attributes(@attr.merge(role: "admin")).should be_true
   end
 end

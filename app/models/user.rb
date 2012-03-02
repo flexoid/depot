@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :role, as: :admin
+  attr_accessor :accessible
 
   ROLES = %w[admin user]
 
@@ -20,5 +20,9 @@ class User < ActiveRecord::Base
 
     def set_default_role
       self.role = "user" if role.nil?
+    end
+
+    def mass_assignment_authorizer(role = :default)
+      super + (accessible || [])
     end
 end

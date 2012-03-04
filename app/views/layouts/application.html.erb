@@ -31,6 +31,9 @@
         <% if can? :read, User %>
           <li><%= link_to 'Users', admin_users_path %></li>
         <% end %>
+        <% if can? :read, Order %>
+          <li><%= link_to 'Orders', orders_path %></li>
+        <% end %>
       </ul>
 
       <% if @cart %>

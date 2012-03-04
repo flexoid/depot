@@ -1,3 +1,5 @@
+if ($('.notice').is(":visible") == true) { $(".notice").hide('blind', 1000); }
+
 $('#cart').html("<%=j render current_cart %>");
 
 if ($('#cart tr').is(":visible") == false) { $('#cart').show('blind', 1000); }

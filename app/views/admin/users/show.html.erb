@@ -13,6 +13,15 @@
     <b>Role:</b>
     <%= @user.role.humanize %>
   </p>
+
+  <p>
+    <b>Orders</b>
+    <ul>
+      <% @user.orders.each do |order| %>
+        <li><%= link_to order.id, order_path(order) %></li>
+      <% end %>
+    </ul>
+  </p>
 </div>
 
 <%= link_to 'Edit', edit_admin_user_path(@user) %> |

@@ -1,0 +1,9 @@
+<%= semantic_form_for(@order) do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :address, :input_html => { :rows => 3 } %>
+    <%= f.input :pay_type, include_blank: false, collection: Order::PAYMENT_TYPES %>
+  <% end %>
+  <%= f.actions do %>
+    <%= f.action :submit, label: :place_order %>
+  <% end %>
+<% end %>

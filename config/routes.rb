@@ -1,4 +1,5 @@
 Depot::Application.routes.draw do
+
   devise_for :users, skip: :registrations
 
   devise_scope :user do
@@ -13,7 +14,7 @@ Depot::Application.routes.draw do
   end
 
   get "store/index"
-  resources :products, :carts, :line_items
+  resources :products, :carts, :line_items, :orders
 
   namespace :admin do
     resources :users

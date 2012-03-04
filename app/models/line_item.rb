@@ -4,8 +4,9 @@ class LineItem < ActiveRecord::Base
 
   belongs_to :cart
   belongs_to :product
+  belongs_to :order
 
-  validates :cart_id, :product_id, :product_price, presence: true
+  validates :product_id, :product_price, presence: true
   validates :product_price, numericality: { greater_than_or_equal_to: 0.01 }
 
   def total_price

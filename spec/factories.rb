@@ -28,4 +28,10 @@ FactoryGirl.define do
       user.save
     end
   end
+
+  factory :order do
+    user
+    address "#{Random.rand(10..999)} Some st., Somecity"
+    pay_type Order::PAYMENT_TYPES.sample
+  end
 end

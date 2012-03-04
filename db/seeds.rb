@@ -59,3 +59,16 @@ users = [
 users.each do |user|
   User.create!(user, without_protection: true)
 end
+
+
+# Orders
+User.select { |user| user.role == "user" }.each do |user|
+  rand(2..5).times do
+    order = Order.create!(user: user,
+                          address: "#{rand(10..999)} Some st., Somecity",
+                          pay_type: Order::PAYMENT_TYPES.sample)
+    rand(2..5).times do
+      order.line_items << LineItem.create!(product: Product.all.sample)
+    end
+  end
+end

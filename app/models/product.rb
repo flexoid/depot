@@ -4,6 +4,8 @@ class Product < ActiveRecord::Base
 
   has_many :line_items
 
+  attr_accessible :title, :description, :price, :image, :retained_image, :remove_image
+
   before_destroy :ensure_not_referenced_by_any_line_item
 
   validates :title, :description, :image, presence: true

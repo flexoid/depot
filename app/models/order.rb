@@ -5,6 +5,8 @@ class Order < ActiveRecord::Base
 
   PAYMENT_TYPES = [ "Check", "Credit card", "Purchase order" ]
 
+  attr_accessible :address, :pay_type
+
   validates :user_id, :address, presence: true
   validates :pay_type, inclusion: PAYMENT_TYPES
 

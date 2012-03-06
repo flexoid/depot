@@ -6,6 +6,8 @@ class LineItem < ActiveRecord::Base
   belongs_to :product
   belongs_to :order
 
+  attr_accessible :quantity
+
   validates :product_id, :product_price, presence: true
   validates :product_price, numericality: { greater_than_or_equal_to: 0.01 }
 

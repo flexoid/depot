@@ -37,17 +37,19 @@ Product.create!(title: 'Rails Test Prescriptions',
   Cart.create!
 end
 
-
-LineItem.create!(product: Product.all[0], cart: Cart.all[0])
-LineItem.create!(product: Product.all[1], cart: Cart.all[1])
-LineItem.create!(product: Product.all[2], cart: Cart.all[2])
-LineItem.create!(product: Product.all[1], cart: Cart.all[0])
-LineItem.create!(product: Product.all[2], cart: Cart.all[1])
-
-LineItem.all.each do |item|
-  item.quantity = rand(1..3)
-  item.save!
+line_items = [
+  {product: Product.all[0], cart: Cart.all[0]},
+  {product: Product.all[1], cart: Cart.all[1]},
+  {product: Product.all[2], cart: Cart.all[2]},
+  {product: Product.all[1], cart: Cart.all[0]},
+  {product: Product.all[2], cart: Cart.all[1]}
+]
+line_items.each do |line_item_attr|
+  line_item = LineItem.new(line_item_attr, without_protection: true)
+  line_item.quantity = rand(1..3)
+  line_item.save!
 end
+
 
 users = [
   {name: "John Smith", email: "john@example.com", password: "password", role: "user"},
@@ -64,11 +66,11 @@ end
 # Orders
 User.select { |user| user.role == "user" }.each do |user|
   rand(2..5).times do
-    order = Order.create!(user: user,
+    order = Order.create!({user: user,
                           address: "#{rand(10..999)} Some st., Somecity",
-                          pay_type: Order::PAYMENT_TYPES.sample)
+                          pay_type: Order::PAYMENT_TYPES.sample}, without_protection: true)
     rand(2..5).times do
-      order.line_items << LineItem.create!(product: Product.all.sample)
+      order.line_items << LineItem.create!({product: Product.all.sample}, without_protection: true)
     end
   end
 end

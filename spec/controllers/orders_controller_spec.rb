@@ -131,7 +131,7 @@ describe OrdersController do
 
       before(:each) do
         @user = Factory(:user)
-        @attr = Factory.attributes_for(:order, user_id: @user)
+        @attr = Factory.attributes_for(:order)
         @controller.stub(:current_user).and_return(@user)
       end
 

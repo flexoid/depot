@@ -2,45 +2,53 @@ require 'spec_helper'
 
 describe Product do
 
-  before(:each) do
-    @attr = Factory.attributes_for :product
+  it "should respects mass-assignment security" do
+    should allow_mass_assignment_of(:title)
+    should allow_mass_assignment_of(:description)
+    should allow_mass_assignment_of(:price)
+    should allow_mass_assignment_of(:image)
+    should allow_mass_assignment_of(:retained_image)
+    should allow_mass_assignment_of(:remove_image)
   end
 
   it "shoult create a new product given valid attr" do
-    Product.create!(@attr)
+    expect {
+      Factory(:product)
+    }.to change(Product, :count).by(1)
   end
 
   it "should require a title" do
-    Product.new(@attr.merge(title: "")).should_not be_valid
+    Factory.build(:product, title: "").should_not be_valid
   end
 
   it "should require a description" do
-    Product.new(@attr.merge(description: "")).should_not be_valid
+    Factory.build(:product, description: "").should_not be_valid
   end
 
   it "should require image url" do
-    Product.new(@attr.merge(image: nil)).should_not be_valid
+    Factory.build(:product, image: nil).should_not be_valid
   end
 
   it "should have image url in valid format" do
-    Product.new(@attr.merge(image: Pathname.new("pic.txt"))).should_not be_valid
+    Factory.build(:product, image: Pathname.new("pic.txt")).should_not be_valid
   end
 
   it "should have numerical price" do
-    Product.new(@attr.merge(price: "five")).should_not be_valid
+    Factory.build(:product, price: "five").should_not be_valid
   end
 
   it "should have a price grater than 0.01" do
-    Product.new(@attr.merge(price: 0.001)).should_not be_valid
+    Factory.build(:product, price: 0.001).should_not be_valid
   end
 
   it "should have unique title" do
-    Product.create!(@attr)
-    Product.new(@attr).should_not be_valid
+    title = "Product title"
+    Factory(:product, title: title)
+    Factory.build(:product, title: title).should_not be_valid
   end
 
   it "should have the title at least 10 characters long" do
-    Product.new(@attr.merge(title: "7 chars")).should_not be_valid
+    Factory.build(:product, title: "7 chars").should_not be_valid
   end
 
   describe "line_items associations:" do

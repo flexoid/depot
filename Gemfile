@@ -7,6 +7,7 @@ gem 'rack-cache', :require => 'rack/cache'
 gem 'dragonfly', '~>0.9.10'
 gem 'devise', '~>2.0.4'
 gem 'cancan', '~>1.6.7'
+gem 'nested_form', git: 'git://github.com/ryanb/nested_form.git'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -24,5 +25,5 @@ group :test do
   gem 'rspec-rails', '2.8.1'
   gem 'factory_girl_rails', '1.6.0'
   gem 'webrat', '0.7.3'
-  gem 'shoulda'
+  gem 'shoulda', '~>3.0.1'
 end

@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# Testing without images
 describe "Products" do
 
   before(:each) do
@@ -22,7 +23,6 @@ describe "Products" do
           visit new_product_path
           fill_in "Title",        :with => ""
           fill_in "Description",  :with => ""
-          attach_file "product_image", File.join(Rails.root, "app/assets/images/ruby.jpg")
           fill_in "Price",        :with => ""
           click_button "Create Product"
           response.should render_template('products/new')
@@ -39,7 +39,6 @@ describe "Products" do
           visit new_product_path
           fill_in "Title",        :with => @product[:title]
           fill_in "Description",  :with => @product[:description]
-          attach_file "product_image", File.join(Rails.root, "app/assets/images/ruby.jpg")
           fill_in "Price",        :with => @product[:price]
           click_button "Create Product"
           response.should have_selector(".notice", :content => "Product was successfully created.")
@@ -52,7 +51,7 @@ describe "Products" do
   describe "updating" do
 
     before(:each) do
-      @product = Factory(:product)
+      @product = Factory(:product_without_images)
     end
 
     describe "failure" do
@@ -62,7 +61,6 @@ describe "Products" do
           visit edit_product_path(@product)
           fill_in "Title",        :with => ""
           fill_in "Description",  :with => ""
-          attach_file "product_image", File.join(Rails.root, "app/assets/images/ruby.jpg")
           fill_in "Price",        :with => ""
           click_button "Update Product"
           response.should render_template('products/edit')
@@ -79,7 +77,6 @@ describe "Products" do
           visit edit_product_path(@product)
           fill_in "Title",        :with => @product[:title] + " New Release"
           fill_in "Description",  :with => @product[:description]
-          attach_file "product_image", File.join(Rails.root, "app/assets/images/ruby.jpg")
           fill_in "Price",        :with => @product[:price]
           click_button "Update Product"
           response.should have_selector(".notice", :content => "Product was successfully updated.")

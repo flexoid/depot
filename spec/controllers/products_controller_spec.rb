@@ -75,6 +75,7 @@ describe ProductsController do
     end
 
     it "should show links" do
+      @ability.can :update, Product
       get :show, {id: @product}, valid_session
       response.should have_selector("a", href: edit_product_path(@product))
       response.should have_selector("a", href: products_path)

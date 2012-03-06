@@ -6,9 +6,7 @@ describe Product do
     should allow_mass_assignment_of(:title)
     should allow_mass_assignment_of(:description)
     should allow_mass_assignment_of(:price)
-    should allow_mass_assignment_of(:image)
-    should allow_mass_assignment_of(:retained_image)
-    should allow_mass_assignment_of(:remove_image)
+    should allow_mass_assignment_of(:images_attributes)
   end
 
   it "shoult create a new product given valid attr" do
@@ -23,14 +21,6 @@ describe Product do
 
   it "should require a description" do
     Factory.build(:product, description: "").should_not be_valid
-  end
-
-  it "should require image url" do
-    Factory.build(:product, image: nil).should_not be_valid
-  end
-
-  it "should have image url in valid format" do
-    Factory.build(:product, image: Pathname.new("pic.txt")).should_not be_valid
   end
 
   it "should have numerical price" do

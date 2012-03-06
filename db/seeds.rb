@@ -1,41 +1,75 @@
-Product.create!(title: 'CoffeeScript',
-  description:
-    %{<p>
-        CoffeeScript is JavaScript done right. It provides all of JavaScript's
-	functionality wrapped in a cleaner, more succinct syntax. In the first
-	book on this exciting new language, CoffeeScript guru Trevor Burnham
-	shows you how to hold onto all the power and flexibility of JavaScript
-	while writing clearer, cleaner, and safer code.
-      </p>},
-  image: Pathname.new('app/assets/images/cs.jpg'),
-  price: 36.00)
+data = [
+  {
+    product: {
+      title: 'CoffeeScrpt',
+      description:
+        %{<p>
+          CoffeeScript is JavaScript done right. It provides all of JavaScript's
+ 	  functionality wrapped in a cleaner, more succinct syntax. In the first
+ 	  book on this exciting new language, CoffeeScript guru Trevor Burnham
+ 	  shows you how to hold onto all the power and flexibility of JavaScript
+ 	  while writing clearer, cleaner, and safer code.
+        </p>},
+      price: 36.00
+    },
+    images: ['cs.jpg', 'cs2.png', 'cs3.jpg']
+  },
+  {
+    product: {
+      title: 'Programming Ruby 1.9',
+      description:
+        %{<p>
+          Ruby is the fastest growing and most exciting dynamic language
+          out there. If you need to get working programs delivered fast,
+          you should add Ruby to your toolbox.
+        </p>},
+      price: 49.95
+    },
+    images: ['ruby.jpg', 'ruby2.jpg', 'ruby3.png']
+  },
+  {
+    product: {
+      title: 'Rails Test Prescriptions',
+      description:
+        %{<p>
+           <em>Rails Test Prescriptions</em> is a comprehensive guide to testing
+           Rails applications, covering Test-Driven Development from both a
+           theoretical perspective (why to test) and from a practical perspective
+           (how to test effectively). It covers the core Rails testing tools and
+           procedures for Rails 2 and Rails 3, and introduces popular add-ons,
+           including Cucumber, Shoulda, Machinist, Mocha, and Rcov.
+        </p>},
+      price: 34.95
+    },
+    images: ['rtp.jpg', 'rails2.jpg']
+  },
+  {
+    product: {
+      title: 'Head First Rails',
+      description:
+        %{<p>
+          Ready to transport your web applications into the Web 2.0 era?
+          <em>Head First Rails</em> takes your programming -- and
+          productivity -- to the max. You'll learn everything from the
+          fundamentals of Rails scaffolding to building customized interactive
+          web apps using Rails' rich set of tools and the MVC framework.
+        </p>},
+      price: 54.99
+    },
+    images: []
+  }
+]
 
-Product.create!(title: 'Programming Ruby 1.9',
-  description:
-    %{<p>
-        Ruby is the fastest growing and most exciting dynamic language
-        out there. If you need to get working programs delivered fast,
-        you should add Ruby to your toolbox.
-      </p>},
-  image: Pathname.new('app/assets/images/ruby.jpg'),
-  price: 49.95)
+data.each do |record|
+  Product.create!(record[:product].merge(images: record[:images].map { |image|
+    Image.new(image: Pathname.new("app/assets/images/#{image}"))}), without_protection: true)
+end
 
-Product.create!(title: 'Rails Test Prescriptions',
-  description:
-    %{<p>
-        <em>Rails Test Prescriptions</em> is a comprehensive guide to testing
-        Rails applications, covering Test-Driven Development from both a
-        theoretical perspective (why to test) and from a practical perspective
-        (how to test effectively). It covers the core Rails testing tools and
-        procedures for Rails 2 and Rails 3, and introduces popular add-ons,
-        including Cucumber, Shoulda, Machinist, Mocha, and Rcov.
-      </p>},
-  image: Pathname.new('app/assets/images/rtp.jpg'),
-  price: 34.95)
 
 3.times do
   Cart.create!
 end
+
 
 line_items = [
   {product: Product.all[0], cart: Cart.all[0]},

@@ -5,8 +5,8 @@
 <% end %>
 <% @products.each do |product| %>
   <div class="entry">
-    <%= thumbnail(product, '80x96!') %>
-    <h3><%= product.title %></h3>
+    <%= first_thumbnail(product, '80x96!') %>
+    <h3><%= link_to product.title, product %></h3>
     <%= sanitize(product.description) %>
     <div class="price_line">
       <span class="price"><%= number_to_currency(product.price) %></span>

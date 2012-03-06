@@ -79,7 +79,8 @@ describe OrdersController do
 
       before(:each) do
         @cart = Factory(:cart)
-        FactoryGirl.create_list(:line_item, 3, cart: @cart)
+        @product = Factory.create(:product)
+        FactoryGirl.create_list(:line_item, 3, cart: @cart, product: @product)
       end
 
       it "should assign a new order as @order" do

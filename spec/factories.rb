@@ -1,10 +1,23 @@
 FactoryGirl.define do
 
-  factory :product do
+  factory :product_without_images, class: Product do
     sequence(:title) { |v| "Programming Ruby Version #{v}" }
     description "Ruby is the most exciting dynamic language out there."
-    image Rack::Test::UploadedFile.new("app/assets/images/ruby.jpg")
     price 49.50
+  end
+
+  factory :product, parent: :product_without_images do
+    ignore do
+      images_count 3
+    end
+
+    after_create do |product, evaluator|
+      FactoryGirl.create_list(:image, evaluator.images_count, product: product)
+    end
+  end
+
+  factory :image do
+    image Rack::Test::UploadedFile.new("app/assets/images/ruby.jpg")
   end
 
   factory :cart do

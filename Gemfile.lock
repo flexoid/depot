@@ -6,6 +6,12 @@ GIT
     formtastic (2.1.0.rc)
       actionpack (~> 3.0)
 
+GIT
+  remote: git://github.com/ryanb/nested_form.git
+  revision: 486e0f0e93f3ca455d5d0fc7869053257b6afce2
+  specs:
+    nested_form (0.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -160,10 +166,11 @@ DEPENDENCIES
   formtastic!
   jquery-rails
   mysql2
+  nested_form!
   rack-cache
   rails (= 3.2.1)
   rspec-rails (= 2.8.1)
   sass-rails (~> 3.2.3)
-  shoulda
+  shoulda (~> 3.0.1)
   uglifier (>= 1.0.3)
   webrat (= 0.7.3)

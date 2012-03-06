@@ -1,0 +1,9 @@
+<%= f.input :image, as: :file %>
+<%= f.hidden_field :retained_image %>
+
+<% image = f.object %>
+<% if image.image_uid %>
+  <%= image_tag image.image.thumb('100x100').url %>
+<% end %>
+
+<%= f.link_to_remove "Remove this image" %>

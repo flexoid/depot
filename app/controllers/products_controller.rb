@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @cart = current_cart
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @product }

@@ -7,6 +7,7 @@ class Ability
   end
 
   def admin
+    can :admin, :all
     can :manage, [Product, User, Cart, Order]
   end
 

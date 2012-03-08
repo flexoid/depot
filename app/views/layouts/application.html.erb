@@ -26,7 +26,7 @@
 
       <ul>
         <% if can? :read, Product %>
-          <li><%= link_to 'Products', products_path %></li>
+          <li><%= link_to 'Products', admin_products_path %></li>
         <% end %>
         <% if can? :read, User %>
           <li><%= link_to 'Users', admin_users_path %></li>

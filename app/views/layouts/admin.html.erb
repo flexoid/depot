@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Depot</title>
+  <%= stylesheet_link_tag 'web_app_theme/web_app_theme' %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <div id="container">
+    <div id="header">
+      <h1><a href="/">Depot</a></h1>
+      <div id="user-navigation">
+        <ul class="wat-cf">
+          <li><%= link_to t("web-app-theme.profile", :default => "Profile"), edit_admin_user_path(current_user) %></li>
+          <li><%= link_to t("web-app-theme.signout", :default => "Sign out"), destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </div>
+      <div id="main-navigation">
+        <ul class="wat-cf"> <li class="<%= controller.controller_path == 'admin/users' ? 'active' : '' %>"><a href="<%= admin_users_path %>">Users</a></li> <li class="<%= controller.controller_path == 'admin/products' ? 'active' : '' %>"><a href="<%= admin_products_path %>">Products</a></li> <li class="<%= controller.controller_path == 'admin/orders' ? 'active' : '' %>"><a href="<%= admin_orders_path %>">Orders</a></li></ul>
+      </div>
+    </div>
+    <div id="wrapper" class="wat-cf">
+      <div class="flash">
+        <% flash.each do |type, message| -%>
+          <div class="message <%= type %>">
+            <p><%= message %></p>
+          </div>
+        <% end -%>
+      </div>
+      <div id="main">
+        <%= yield %>
+        <div id="footer">
+          <div class="block">
+            <p>Copyright &copy; <%= Time.now.year %> Depot.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

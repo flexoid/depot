@@ -126,48 +126,68 @@ describe OrdersController do
 
     before(:each) do
       @ability.can :create, Order
+      @cart = Factory(:cart)
+      @controller.stub(:current_cart).and_return(@cart)
     end
 
-    describe "with valid params" do
+    context "when cart isn't empty" do
 
       before(:each) do
-        @user = Factory(:user)
-        @attr = Factory.attributes_for(:order)
-        @controller.stub(:current_user).and_return(@user)
+        @product = Factory.create(:product)
+        FactoryGirl.create_list(:line_item, 3, cart: @cart, product: @product)
       end
 
-      it "should create a new Order" do
-        expect {
+      describe "with valid params" do
+
+        before(:each) do
+          @user = Factory(:user)
+          @attr = Factory.attributes_for(:order)
+
+          @controller.stub(:current_user).and_return(@user)
+        end
+
+        it "should create a new Order" do
+          expect {
+            post :create, {order: @attr}, valid_session
+          }.to change(Order, :count).by(1)
+        end
+
+        it "should assign a newly created order as @order" do
           post :create, {order: @attr}, valid_session
-        }.to change(Order, :count).by(1)
+          assigns(:order).should be_a(Order)
+          assigns(:order).should be_persisted
+        end
+
+        it "should redirect to the store" do
+          post :create, {order: @attr}, valid_session
+          response.should redirect_to(store_url)
+        end
       end
 
-      it "should assign a newly created order as @order" do
-        post :create, {order: @attr}, valid_session
-        assigns(:order).should be_a(Order)
-        assigns(:order).should be_persisted
-      end
+      describe "with invalid params" do
 
-      it "should redirect to the store" do
-        post :create, {order: @attr}, valid_session
-        response.should redirect_to(store_url)
+        it "should assign a newly created but unsaved order as @order" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Order.any_instance.stub(:save).and_return(false)
+          post :create, {:order => {}}, valid_session
+          assigns(:order).should be_a_new(Order)
+        end
+
+        it "should re-render the 'new' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Order.any_instance.stub(:save).and_return(false)
+          post :create, {:order => {}}, valid_session
+          response.should render_template("new")
+        end
       end
     end
 
-    describe "with invalid params" do
+    context "with empty cart" do
 
-      it "should assign a newly created but unsaved order as @order" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Order.any_instance.stub(:save).and_return(false)
-        post :create, {:order => {}}, valid_session
-        assigns(:order).should be_a_new(Order)
-      end
-
-      it "should re-render the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Order.any_instance.stub(:save).and_return(false)
-        post :create, {:order => {}}, valid_session
-        response.should render_template("new")
+      it "should redirect to the store with alert" do
+        post :create, {}, valid_session
+        response.should redirect_to(store_url)
+        flash[:alert].should_not be_empty
       end
     end
   end

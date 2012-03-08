@@ -4,6 +4,6 @@ module Admin::UsersHelper
   end
 
   def role(user)
-    user.try(:role) ? user.role.humanize : User::ROLES.last
+    user.try(:role) ? user.role : User::ROLES.last
   end
 end

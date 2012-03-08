@@ -4,7 +4,15 @@
     <%= f.input :email %>
     <%= f.input :role, include_blank: false, selected: role(@user), collection: roles_collection if can?(:set_role, User) %>
     <%= f.input :password, hint: :new_password %>
-    <%= f.input :password_confirmation %>
+    <%= f.input :password_confirmation, required: true %>
   <% end %>
-  <%= f.actions %>
+
+  <div class="group navform wat-cf">
+    <button class="button" type="submit">
+      <%= image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}") %> <%= t("web-app-theme.save", :default => "Save") %>
+    </button>
+    <span class="text_button_padding"><%= t("web-app-theme.or", :default => "or") %></span>
+    <%= link_to t("web-app-theme.cancel", :default => "Cancel"), admin_users_path, :class => "text_button_padding link_button" %>
+  </div>
+
 <% end %>

@@ -44,6 +44,11 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
+    if current_cart.line_items.empty?
+      redirect_to store_url, alert: "Your cart is empty"
+      return
+    end
+
     @order.add_line_items_from_cart(current_cart)
     @order.user = current_user
 

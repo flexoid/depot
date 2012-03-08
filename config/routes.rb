@@ -14,10 +14,12 @@ Depot::Application.routes.draw do
   end
 
   get "store/index"
-  resources :products, :carts, :line_items, :orders
+  resources :products, only: [:show]
+  resources :carts, :line_items, :orders
 
   namespace :admin do
-    resources :users
+    resources :users, :products
+    resources :orders, except: [:new, :create]
   end
 
   # The priority is based upon order of creation:

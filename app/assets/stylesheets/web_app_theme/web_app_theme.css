@@ -1,0 +1,11 @@
+/*
+:wa
+ * This css will include all web-app-theme css you need
+ *
+ *= require web-app-theme/base
+ *= require ./themes/default/style.css.scss
+ *= require formtastic
+ *= require_self
+ */
+
+/* Write here your css for overriding the theme's rules */

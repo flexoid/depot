@@ -11,7 +11,6 @@ en:
         title: "More than 10 characters long"
         image_url: "Only jpg, png or gif image"
       user:
-        new_password: "Leave blank if you don't want to change it"
         current_password: "We need your current password to confirm your changes"
     actions:
       sign_up: "Sign up"

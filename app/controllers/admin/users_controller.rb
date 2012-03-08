@@ -1,10 +1,11 @@
 include Admin::UsersHelper
 
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < Admin::BaseController
   load_and_authorize_resource
+  skip_load_and_authorize_resource only: :create
 
-  # GET /users
-  # GET /users.json
+  # GET /admin/users
+  # GET /admin/users.json
   def index
     respond_to do |format|
       format.html # index.html.erb
@@ -12,8 +13,8 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # GET /users/1
-  # GET /users/1.json
+  # GET /admin/users/1
+  # GET /admin/users/1.json
   def show
     respond_to do |format|
       format.html # show.html.erb
@@ -21,8 +22,8 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
-  # GET /users/new.json
+  # GET /admin/users/new
+  # GET /admin/users/new.json
   def new
     respond_to do |format|
       format.html # new.html.erb
@@ -30,13 +31,17 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
+  # GET /admin/users/1/edit
   def edit
   end
 
-  # POST /users
-  # POST /users.json
+  # POST /admin/users
+  # POST /admin/users.json
   def create
+    @user = User.new
+    @user.accessible = [:role] if can? :set_role, @user
+    @user.assign_attributes(params[:user])
+
     respond_to do |format|
       if @user.save
         format.html { redirect_to [:admin, @user], notice: 'User was successfully created.' }
@@ -48,8 +53,8 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.json
+  # PUT /admin/users/1
+  # PUT /admin/users/1.json
   def update
     if params[:user][:password].blank?
       params[:user].delete(:password)
@@ -69,8 +74,8 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
+  # DELETE /admin/users/1
+  # DELETE /admin/users/1.json
   def destroy
     @user.destroy
 

@@ -1,0 +1,31 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", admin_orders_path  %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", admin_order_path %></li>
+    </ul>
+  </div>
+  <div class="content">
+    <div class="inner">
+
+        <p>
+          <b><%= t("activerecord.attributes.admin_order.address", :default => t("activerecord.labels.address", :default => "Address")) %>:</b>
+          <%= @order.address %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.admin_order.pay_type", :default => t("activerecord.labels.pay_type", :default => "Pay type")) %>:</b>
+          <%= @order.pay_type %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.admin_order.user_id", :default => t("activerecord.labels.user_id", :default => "User")) %>:</b>
+          <%= @order.user_id %>
+        </p>
+      <div class="wat-cf">
+        <%= link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_admin_order_path(@order), :class => "button" %>
+        <%= link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), admin_order_path(@order), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>
+    </div>
+  </div>
+</div>

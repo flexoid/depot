@@ -1,0 +1,19 @@
+<%= semantic_nested_form_for [:admin, @product], :html => {:multipart => true} do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :title %>
+    <%= f.input :description %>
+
+    <%= f.fields_for :images %>
+    <%= f.link_to_add "Add an image", :images %>
+
+    <%= f.input :price %>
+  <% end %>
+
+  <div class="group navform wat-cf">
+    <button class="button" type="submit">
+      <%= image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}") %> <%= t("web-app-theme.save", :default => "Save") %>
+    </button>
+    <span class="text_button_padding"><%= t("web-app-theme.or", :default => "or") %></span>
+  	<%= link_to t("web-app-theme.cancel", :default => "Cancel"), admin_products_path, :class => "text_button_padding link_button" %>
+  </div>
+<% end %>

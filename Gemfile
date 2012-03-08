@@ -17,13 +17,10 @@ end
 
 gem 'jquery-rails'
 
-group :development do
-  gem 'rspec-rails', '2.8.1'
-end
-
-group :test do
+group :development, :test do
   gem 'rspec-rails', '2.8.1'
   gem 'factory_girl_rails', '1.6.0'
   gem 'webrat', '0.7.3'
-  gem 'shoulda', '~>3.0.1'
+  gem 'shoulda-matchers', '~>1.0.0'
+  gem 'web-app-theme', git: 'git://github.com/pilu/web-app-theme.git'
 end

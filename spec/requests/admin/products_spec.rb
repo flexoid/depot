@@ -20,11 +20,11 @@ describe "Products" do
 
       it "should not make a new product with empty parameters" do
         lambda do
-          visit new_product_path
+          visit new_admin_product_path
           fill_in "Title",        :with => ""
           fill_in "Description",  :with => ""
           fill_in "Price",        :with => ""
-          click_button "Create Product"
+          click_button
           response.should render_template('products/new')
           # response.should have_selector("div#error_explanation")
         end.should_not change(Product, :count)
@@ -36,11 +36,11 @@ describe "Products" do
       it "should make a new product" do
         @product = Factory.attributes_for(:product)
         lambda do
-          visit new_product_path
+          visit new_admin_product_path
           fill_in "Title",        :with => @product[:title]
           fill_in "Description",  :with => @product[:description]
           fill_in "Price",        :with => @product[:price]
-          click_button "Create Product"
+          click_button
           response.should have_selector(".notice", :content => "Product was successfully created.")
           response.should render_template('products/show')
         end.should change(Product, :count).by(1)
@@ -58,11 +58,11 @@ describe "Products" do
 
       it "shouldn't update porduct with invalid parameters" do
         lambda do
-          visit edit_product_path(@product)
+          visit edit_admin_product_path(@product)
           fill_in "Title",        :with => ""
           fill_in "Description",  :with => ""
           fill_in "Price",        :with => ""
-          click_button "Update Product"
+          click_button
           response.should render_template('products/edit')
           # response.should have_selector("div#error_explanation")
           @product.reload
@@ -74,11 +74,11 @@ describe "Products" do
 
       it "should update product" do
         lambda do
-          visit edit_product_path(@product)
+          visit edit_admin_product_path(@product)
           fill_in "Title",        :with => @product[:title] + " New Release"
           fill_in "Description",  :with => @product[:description]
           fill_in "Price",        :with => @product[:price]
-          click_button "Update Product"
+          click_button
           response.should have_selector(".notice", :content => "Product was successfully updated.")
           response.should render_template('products/show')
           @product.reload

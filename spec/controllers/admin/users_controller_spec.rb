@@ -8,6 +8,10 @@ describe Admin::UsersController do
 
   ability_init
 
+  before(:each) do
+    @ability.can :admin, :all
+  end
+
   describe "GET index" do
 
     before(:each) do

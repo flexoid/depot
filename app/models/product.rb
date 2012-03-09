@@ -2,6 +2,7 @@ class Product < ActiveRecord::Base
 
   has_many :line_items
   has_many :images, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   accepts_nested_attributes_for :images, allow_destroy: true, reject_if: :all_blank
 

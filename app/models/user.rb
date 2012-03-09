@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   before_validation :set_default_role
 
   has_many :orders
+  has_many :comments
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable

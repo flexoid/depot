@@ -1,0 +1,19 @@
+#comments_list {
+
+  a {
+    margin-top: 20px;
+  }
+
+  .comment {
+    margin-top: 15px;
+
+    .info .date {
+      float: right;
+    }
+
+    .text {
+      padding-top: 10px;
+      padding-bottom: 5px;
+    }
+  }
+}

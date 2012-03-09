@@ -14,7 +14,11 @@ Depot::Application.routes.draw do
   end
 
   get "store/index"
-  resources :products, only: [:show]
+
+  resources :products, only: [:show] do
+    resources :comments, only: [:new, :create]
+  end
+
   resources :carts, :line_items, :orders
 
   namespace :admin do

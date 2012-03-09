@@ -1,0 +1,11 @@
+<div id="comments_list">
+  <h3>Comments</h3>
+  <%= render product.comments %>
+
+  <% if can? :create, Comment %>
+    <div id="add_comment">
+      <h3><%= link_to 'Add comment', new_product_comment_path(product) %></h3>
+      <%= render 'comments/form' %>
+    </div>
+  <% end %>
+</div>

@@ -22,5 +22,9 @@
   </p>
 </div>
 
-<%= button_to 'Add to Cart', line_items_path(product_id: @product), remote: true %>
-<%= link_to 'Back to shopping', store_path %>
+<div id="nav_links">
+  <%= button_to 'Add to Cart', line_items_path(product_id: @product), remote: true %>
+  <%= link_to 'Back to shopping', store_path %>
+</div>
+
+<%= render partial: 'comments', locals: { product: @product } %>

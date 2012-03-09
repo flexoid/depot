@@ -11,10 +11,11 @@ class CommentsController < ApplicationController
 
   def create
     @comment.user = current_user
+    @comment.parent_id = Comment.find_by_id(@comment.parent_id).try(:id)
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment.product, notice: 'Comment was successfully posted.' }
+        format.html { redirect_to "#{url_for(@comment.product)}#comment-#{@comment.id}", notice: 'Comment was successfully posted.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render action: "new" }

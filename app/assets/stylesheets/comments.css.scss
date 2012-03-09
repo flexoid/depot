@@ -1,5 +1,13 @@
 #comments_list {
 
+  ul {
+    list-style-type: none;
+  }
+
+  ul.root {
+    padding-left: 0;
+  }
+
   a {
     margin-top: 20px;
   }

@@ -1,9 +1,17 @@
-<div class="comment">
+<li class="comment" id=<%= "comment-#{comment.id}" %>>
   <div class="info">
     <span><b>User: </b><%= comment.user.name %></span>
     <span class="date"><b>Post date: </b><%= comment.created_at %></span>
+
+    <% unless comment.root? %>
+      <span class="link_to_parent"><%= link_to "↑", "#comment-#{comment.parent_id}" %></span>
+    <% end %>
   </div>
   <div class="text">
     <%= comment.text %>
   </div>
-</div>
+  <div class="reply">
+    <%= link_to 'Reply', new_product_comment_path(comment.product, reply_to: comment),
+      onclick: "comment_show_reply_form(#{comment.id}); return false" %>
+  </div>
+</li>

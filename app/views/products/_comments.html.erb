@@ -1,24 +1,17 @@
-<div id="comments_list">
-  <h3>Comments</h3>
+<h3>Comments</h3>
 
-  <% if @arranged_comments.any? %>
-    <%= render_tree @arranged_comments, class: "root" do |comment, child| %>
-      <%= render comment %>
-      <%= child %>
-    <% end %>
-  <% else %>
-    There are no comments yet
-  <% end %>
-
-  <% if can? :create, Comment %>
-    <div id="add_comment">
-      <h3>
-        <%= link_to 'Add comment', new_product_comment_path(product),
-          onclick: "comment_show_reply_form(null); return false" %>
-      </h3>
-      <div id="comments_form">
-        <%= render 'comments/form' %>
-      </div>
-    </div>
-  <% end %>
+<div id="tree">
+  <%= render partial: 'tree', locals: { comments: product.comments } %>
 </div>
+
+<% if can? :create, Comment %>
+  <div id="add_comment">
+    <h3>
+      <%= link_to 'Add comment', new_product_comment_path(product),
+        onclick: "comment_show_reply_form(null); return false" %>
+    </h3>
+    <div id="comments_form">
+      <%= render 'comments/form' %>
+    </div>
+  </div>
+<% end %>

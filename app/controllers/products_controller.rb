@@ -3,7 +3,6 @@ class ProductsController < ApplicationController
 
   def show
     @cart = current_cart
-    @arranged_comments = @product.comments.arrange
     @comment = Comment.new if can? :create, Comment
 
     respond_to do |format|

@@ -15,7 +15,9 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to "#{url_for(@comment.product)}#comment-#{@comment.id}", notice: 'Comment was successfully posted.' }
+        format.html { redirect_to "#{url_for(@comment.product)}#comment-#{@comment.id}",
+                      notice: 'Comment was successfully posted.' }
+        format.js
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render action: "new" }

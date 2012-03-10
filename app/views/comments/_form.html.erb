@@ -1,4 +1,4 @@
-<%= semantic_form_for [@product, @comment] do |f| %>
+<%= semantic_form_for [@product, @comment], remote: true do |f| %>
   <%= f.inputs do %>
     <%= f.input :text, label: false, required: false, :input_html => { :rows => 3 } %>
   <% end %>

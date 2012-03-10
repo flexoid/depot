@@ -1,0 +1,8 @@
+<% if (arranged_comments = comments.arrange).any? %>
+  <%= render_tree arranged_comments, class: "root" do |comment, child| %>
+    <%= render comment %>
+    <%= child %>
+  <% end %>
+<% else %>
+  There are no comments yet
+<% end %>

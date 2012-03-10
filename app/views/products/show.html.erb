@@ -27,4 +27,6 @@
   <%= link_to 'Back to shopping', store_path %>
 </div>
 
-<%= render partial: 'comments', locals: { product: @product } %>
+<div id="comments_list">
+  <%= render partial: 'comments', locals: { product: @product } %>
+</div>

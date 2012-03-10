@@ -1,4 +1,5 @@
 function comment_show_reply_form(comment_id) {
+  $('.comment .reply a').show();
   var form = $('#comments_form');
   $('input[name="comment[parent_id]"]',form).val(comment_id);
   if(comment_id) {

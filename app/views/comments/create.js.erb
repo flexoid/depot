@@ -1,0 +1,6 @@
+var form = $('#comments_form');
+$('input[name="comment[parent_id]"]',form).val(null);
+$('textarea[name="comment[text]"]',form).val("");
+$('#add_comment').append(form);
+
+$('#tree').html("<%=j render partial: 'products/tree', locals: { comments: @product.comments } %>");

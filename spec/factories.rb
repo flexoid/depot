@@ -47,4 +47,10 @@ FactoryGirl.define do
     address "#{Random.rand(10..999)} Some st., Somecity"
     pay_type Order::PAYMENT_TYPES.sample
   end
+
+  factory :comment do
+    product
+    text "I'm #{user.name} and I approve this message"
+    parent_id nil
+  end
 end

@@ -10,8 +10,10 @@
   <div class="text">
     <%= comment.text %>
   </div>
-  <div class="reply">
-    <%= link_to 'Reply', new_product_comment_path(comment.product, reply_to: comment),
-      onclick: "comment_show_reply_form(#{comment.id}); return false" %>
-  </div>
+  <% if can? :create, Comment %>
+    <div class="reply">
+      <%= link_to 'Reply', new_product_comment_path(comment.product, reply_to: comment),
+        onclick: "comment_show_reply_form(#{comment.id}); return false" %>
+    </div>
+  <% end %>
 </li>

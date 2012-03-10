@@ -1,7 +1,7 @@
 data = [
   {
     product: {
-      title: 'CoffeeScrpt',
+      title: 'CoffeeScript',
       description:
         %{<p>
           CoffeeScript is JavaScript done right. It provides all of JavaScript's
@@ -106,5 +106,32 @@ User.select { |user| user.role == "user" }.each do |user|
     rand(2..5).times do
       order.line_items << LineItem.create!({product: Product.all.sample}, without_protection: true)
     end
+  end
+end
+
+
+# Comments
+def createComment(product, user, parent = nil)
+  comment = Comment.create!({
+    text: parent.nil? ? "I'm #{user.name} and I think that #{product.title} is #{%w(good perfect bad horrible).sample}" :
+      "I'm #{user.name} and I #{%w(agree disagree).sample} with #{parent.user.name}",
+    product: product,
+    user: user},
+    without_protection: true
+  )
+
+  comment.move_to_child_of(parent) unless parent.nil?
+end
+
+Product.all.each do |product|
+  User.all.each do |user|
+    product.reload
+
+    another_user_comments = product.comments.select { |comment| comment.user != user }
+    another_user_comments.sample(another_user_comments.count / 2).each do |parent_comment|
+      createComment(product, user, parent_comment)
+    end
+
+    createComment(product, user)
   end
 end

@@ -7,17 +7,33 @@
   </div>
   <div class="content">
     <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Products</h2>
+
+    <%= search_form_for [:admin, @search] do |f| %>
+      <%= f.label :title_cont %>
+      <%= f.text_field :title_cont %>
+      <%= field_set_tag "Price" do %>
+        <%= f.label :price_gteq, "≥" %>
+        <%= f.number_field :price_gteq, min: 0 %>
+        <%= f.label :price_lteq, "≤" %>
+        <%= f.number_field :price_lteq, min: 0 %>
+      <% end %>
+      <%= f.submit %>
+    <% end %>
+
     <div class="inner">
       <table class="table">
         <tr>
-          <th class="first">ID</th>
-          <th>
-            <%= t("activerecord.attributes.admin_product.title", :default => t("activerecord.labels.title", :default => "Title")) %>
+          <th class="first">
+            <%= sort_link @search, :id, "ID" %>
           </th>
           <th>
-            <%= t("activerecord.attributes.admin_product.price", :default => t("activerecord.labels.price", :default => "Price")) %>
+            <%= sort_link @search, :title, t("activerecord.attributes.admin_product.title",
+                                              :default => t("activerecord.labels.title", :default => "Title")) %>
           </th>
-          <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th>
+            <%= sort_link @search, :price, t("activerecord.attributes.admin_product.price", :default => t("activerecord.labels.price", :default => "Price")) %>
+          </th>
+          <th><%= sort_link @search, :created_at, t("web-app-theme.created_at", :default => "Created at")  %></th>
           <th class="last">&nbsp;</th>
         </tr>
         <% @products.each do |product| -%>

@@ -5,7 +5,8 @@ class Admin::ProductsController < Admin::BaseController
   # GET /admin/products
   # GET /admin/products.json
   def index
-    @products = Product.page(params[:page]).per(10)
+    @search = Product.search(params[:q])
+    @products = @search.result.page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb

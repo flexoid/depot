@@ -1,5 +1,4 @@
 class Product < ActiveRecord::Base
-  default_scope order(:id)
 
   has_many :line_items
   has_many :images, dependent: :destroy

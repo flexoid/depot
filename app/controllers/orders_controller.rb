@@ -60,7 +60,6 @@ class OrdersController < ApplicationController
         format.json { render json: @order, status: :created, location: @order }
       else
         @cart = current_cart
-        Rails.logger.info @order.errors.inspect
         format.html { render action: "new" }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end

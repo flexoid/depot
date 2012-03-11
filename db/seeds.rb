@@ -65,6 +65,11 @@ data.each do |record|
     Image.new(image: Pathname.new("app/assets/images/#{image}"))}), without_protection: true)
 end
 
+# 20 dummy products without images
+(1..20).each do |n|
+  Product.create!(title: "Dummy product ##{n.to_s.rjust(2, '0')}", description: "<p>Discription for dummy product ##{n}</p>",
+                  price: rand() * 180 + 20)
+end
 
 3.times do
   Cart.create!

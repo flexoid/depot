@@ -1,9 +1,12 @@
 class Admin::ProductsController < Admin::BaseController
   load_and_authorize_resource
+  skip_load_resource only: :index
 
   # GET /admin/products
   # GET /admin/products.json
   def index
+    @products = Product.page(params[:page]).per(10)
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @products }

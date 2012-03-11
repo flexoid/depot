@@ -9,6 +9,7 @@ gem 'devise', '~>2.0.4'
 gem 'cancan', '~>1.6.7'
 gem 'nested_form', git: 'git://github.com/ryanb/nested_form.git'
 gem 'nested_set', '~>1.7.0'
+gem 'kaminari', '~>0.13.0'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

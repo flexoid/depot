@@ -46,6 +46,12 @@ describe Admin::ProductsController do
         response.should have_selector("a", href: admin_product_path(product), content: 'Delete')
       end
     end
+
+    it "should paginate list of products" do
+      FactoryGirl.create_list(:product, 12)
+      get 'index'
+      assigns(:products).count.should eq(10)
+    end
   end
 
   describe "GET show" do

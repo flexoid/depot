@@ -258,7 +258,17 @@ hr {
   margin-top: 11px;
 }
 
-.pagination a, .pagination span {
+.pagination span.current, span.gap {
+  background: #261f1f;
+  color: white;
+  border: 1px solid #261f1f;
+  padding: 6px;
+  min-width: 15px;
+  text-align: center;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+.pagination a {
   border: 1px solid #c3c4ba;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
@@ -271,16 +281,12 @@ hr {
   background-image: image-url("web-app-theme/themes/default/images/button-background.png");
   color: #111111;
 }
+
 .pagination a:hover {
   border: 1px solid #818171;
   -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-}
-.pagination span.current {
-  background: #261f1f;
-  color: white;
-  border: 1px solid #261f1f;
 }
 
 .pagination a:active {

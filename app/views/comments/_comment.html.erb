@@ -4,7 +4,9 @@
     <span class="date"><b>Post date: </b><%= comment.created_at %></span>
 
     <% unless comment.root? %>
-      <span class="link_to_parent"><%= link_to "↑", "#comment-#{comment.parent_id}" %></span>
+      <span class="link_to_parent">
+        <%= link_to "↑", "#comment-#{comment.parent_id}", onclick: "highlight_comment(#{comment.parent_id})" %>
+      </span>
     <% end %>
   </div>
   <div class="text">

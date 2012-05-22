@@ -14,3 +14,8 @@ function comment_show_reply_form(comment_id) {
   $('#comment_text', form).focus();
   return false;
 }
+
+
+function highlight_comment(comment_id) {
+  $('#comment-' + comment_id).effect("highlight", {}, 3000);
+}

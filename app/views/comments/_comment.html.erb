@@ -5,7 +5,8 @@
 
     <% unless comment.root? %>
       <span class="link_to_parent">
-        <%= link_to "↑", "#comment-#{comment.parent_id}", onclick: "highlight_comment(#{comment.parent_id})" %>
+        <%= link_to "↑", "#comment-#{comment.parent_id}",
+          onclick: "highlight_comment(#{comment.parent_id}); scroll_to_comment(#{comment.parent_id})" %>
       </span>
     <% end %>
   </div>

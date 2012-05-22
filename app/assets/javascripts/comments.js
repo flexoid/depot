@@ -19,3 +19,7 @@ function comment_show_reply_form(comment_id) {
 function highlight_comment(comment_id) {
   $('#comment-' + comment_id).effect("highlight", {}, 3000);
 }
+
+function scroll_to_comment(comment_id) {
+  $('html,body').animate({scrollTop: $('#comment-' + comment_id).offset().top},'slow');
+}
